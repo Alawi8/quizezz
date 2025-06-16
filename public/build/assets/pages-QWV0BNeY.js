@@ -1,0 +1,1 @@
+import{c as t}from"./quizManager-DEaLXvXe.js";import{m as e,u as o}from"./userAuth-BI36wup4.js";window.Alpine=e;document.addEventListener("alpine:init",()=>{e.store("userAuth",o()),e.data("chooseSections",t)});e.start();
