@@ -11,26 +11,8 @@
             </div>
 
             <!-- Auth Section -->
-            <div class="flex items-center space-x-4 text-sm">
-                <!-- Logged in -->
-                <template x-if="$store.userAuth.user">
-                    <div class="flex items-center space-x-3">
-                        <span class="text-white font-semibold" x-text="$store.userAuth.user.name"></span>
+           <div id="auth-nav"></div>
 
-                        <button @click="$store.userAuth.logout()" class="text-red-100 hover:text-white bg-red-600 px-3 py-1 rounded">
-                            Logout
-                        </button>
-                    </div>
-                </template>
-
-                <!-- Guest -->
-                <template x-if="!$store.userAuth.user">
-                    <div class="flex items-center space-x-3">
-                        <a href="/login" class="text-white hover:underline">Login</a>
-                        <a href="/register" class="text-white hover:underline">Register</a>
-                    </div>
-                </template>
-            </div>
         </div>
     </div>
 </nav>

@@ -1,13 +1,6 @@
 {
-  "_quizManager-DEaLXvXe.js": {
-    "file": "assets/quizManager-DEaLXvXe.js",
-    "name": "quizManager",
-    "imports": [
-      "_userAuth-BI36wup4.js"
-    ]
-  },
-  "_userAuth-BI36wup4.js": {
-    "file": "assets/userAuth-BI36wup4.js",
+  "_userAuth-KD1KgvKP.js": {
+    "file": "assets/userAuth-KD1KgvKP.js",
     "name": "userAuth"
   },
   "resources/css/app.css": {
@@ -15,33 +8,25 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/js/entrypoints/admin.js": {
-    "file": "assets/admin-C51kmnol.js",
-    "name": "admin",
-    "src": "resources/js/entrypoints/admin.js",
+  "resources/js/composable/app.js": {
+    "file": "assets/app-CySYt9FI.js",
+    "name": "app",
+    "src": "resources/js/composable/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-BI36wup4.js"
+      "_userAuth-KD1KgvKP.js"
     ]
   },
   "resources/js/entrypoints/app.js": {
-    "file": "assets/app-QWV0BNeY.js",
+    "file": "assets/app-BZYrWF-0.js",
     "name": "app",
     "src": "resources/js/entrypoints/app.js",
     "isEntry": true,
     "imports": [
-      "_quizManager-DEaLXvXe.js",
-      "_userAuth-BI36wup4.js"
-    ]
-  },
-  "resources/js/entrypoints/pages.js": {
-    "file": "assets/pages-QWV0BNeY.js",
-    "name": "pages",
-    "src": "resources/js/entrypoints/pages.js",
-    "isEntry": true,
-    "imports": [
-      "_quizManager-DEaLXvXe.js",
-      "_userAuth-BI36wup4.js"
+      "_userAuth-KD1KgvKP.js"
+    ],
+    "css": [
+      "assets/app-BRTmh6J9.css"
     ]
   }
 }

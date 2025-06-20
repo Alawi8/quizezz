@@ -9,7 +9,7 @@
     <meta name="description" content="Explore quizzes and challenge your knowledge.">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    @vite(['resources/css/app.css', 'resources/js/entrypoints/pages.js'])
+    @vite(['resources/css/app.css', 'resources/js/entrypoints/app.js' , 'resources/js/composable/app.js'])
 </head>
 <body x-data="chooseSections()" x-init="$store.userAuth.init(); init()">
     <!-- Admin Shortcut -->
@@ -26,7 +26,9 @@
         </div>
     </template>
 
-    @include('layouts.header')
+{{--    @include('layouts.header')--}}
+
+    <div id="app"></div>
 
     <template x-if="$store.userAuth.user && $store.userAuth.user.roles.some(r => r.name === 'super-admin' || r.name === 'student')">
         <main class="flex-grow container mx-auto px-4 py-8">
