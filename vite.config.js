@@ -11,6 +11,8 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/entrypoints/app.js",
                 "resources/js/composable/app.js",
+                "resources/js/quizezz-env/app.js",
+                "resources/js/admin/app.js"
             ],
             refresh: true,
             build: {

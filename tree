@@ -1,0 +1,13 @@
+PS C:\xampp\htdocs\quizezz\resources\js\entrypoints> tree /F
+Folder PATH listing
+Volume serial number is 62F1-8CD5
+C:.
+│   app.js
+│   App.vue
+│
+├───components
+│       Header.vue
+│       Home.vue
+│
+└───src
+        router.js

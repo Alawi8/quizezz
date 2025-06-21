@@ -12,49 +12,39 @@ class QuestionSeeder extends Seeder
 {
     public function run()
     {
-        // ✅ إنشاء اختبار أو جلبه لو موجود
-        $test = Test::firstOrCreate(
-            ['title' => 'Medical Test'], // شرط التحقق
-            [
-                'description' => 'A test about medical knowledge',
-                'duration' => 30, // دقيقة
-            ]
-        );
-
-        $medicalQuestions = [
-            "What is the function of the liver in detoxification?",
-            "Which organ is responsible for oxygenating blood?",
-            "What is the primary cause of Type 2 Diabetes?",
-            "Which vitamin is necessary for blood clotting?",
-            "How does high blood pressure affect the heart over time?",
-            "Which brain part regulates balance and coordination?",
-            "What is a common symptom of a heart attack?",
-            "Which hormone controls blood sugar levels?",
-            "What is the medical term for high blood pressure?",
-            "What is the leading cause of kidney disease globally?"
-        ];
-
         $now = Carbon::now();
 
-        foreach ($medicalQuestions as $questionText) {
-            $question = $test->questions()->create([
-                'question_text' => $questionText,
-                'created_at' => $now,
-                'updated_at' => $now
-            ]);
+        for ($section = 1; $section <= 5; $section++) {
+            $test = Test::firstOrCreate(
+                ['title' => "Test Section $section - " . uniqid()],
+                [
+                    'description' => "Unique section $section created at " . $now,
+                    'duration' => 15
+                ]
+            );
 
-            $correctIndex = rand(1, 4);
-
-            for ($i = 1; $i <= 4; $i++) {
-                $question->answers()->create([
-                    'answer_text' => "Option $i",
-                    'is_correct' => $i === $correctIndex,
+            for ($q = 1; $q <= 5; $q++) {
+                $questionText = "[Section $section] What is the answer to question $q?";
+                $question = $test->questions()->create([
+                    'question_text' => $questionText,
                     'created_at' => $now,
                     'updated_at' => $now
                 ]);
+
+                $correctIndex = rand(1, 4);
+
+                for ($a = 1; $a <= 4; $a++) {
+                    $answerText = "[S$section-Q$q-A$a] This is option $a";
+                    $question->answers()->create([
+                        'answer_text' => $answerText,
+                        'is_correct' => $a === $correctIndex,
+                        'created_at' => $now,
+                        'updated_at' => $now
+                    ]);
+                }
             }
         }
 
-        echo "✅ Seeded medical test with questions and answers.\n";
+        echo "✅ Seeded 5 unique sections with 5 unique questions each (4 answers per question).\n";
     }
 }

@@ -9,7 +9,7 @@
     <meta name="description" content="Explore quizzes and challenge your knowledge.">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    @vite(['resources/css/app.css', 'resources/js/entrypoints/app.js' , 'resources/js/composable/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/entrypoints/app.js'])
 </head>
 <body x-data="chooseSections()" x-init="$store.userAuth.init(); init()">
     <!-- Admin Shortcut -->

@@ -16,7 +16,8 @@ Route::get('/sanctum/csrf-cookie', function (Request $request) {
 
 // PAGES OF DASHBOARD
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::view('/dashboard', 'admin.dashboard.index')->name('dashboard');
+    Route::view('/dashboard/', 'admin.dashboard.index')->name('dashboard');
+    Route::view('/dashboard/{any}', 'admin.dashboard.index')->name('dashboard');
     Route::view('/questions', 'admin.questions.index')->name('about');
     Route::view('/section', 'admin.sections.index')->name('section');
     Route::view('/settings', 'admin.questions.import')->name('settings');
@@ -31,8 +32,8 @@ Route::prefix('/')->group(function () {
     Route::view('/register', 'auth.register')->name('register');
     Route::view('/sections', 'sections')->name('sections');
 });
-Route::get('/questions', function () {
-    return view('frontend.questions');
+Route::get('/questions/{id}', function ($id) {
+    return view('frontend.questions', ['id'=>$id ]);
 });
 // DISPLAY SECTIONS BY ID
 Route::get('/test/{id}', function ($id) {

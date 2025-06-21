@@ -58,7 +58,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // ✅ Create a user named Ali and assign super-admin role
         $ali = User::firstOrCreate(
-            ['email' => 'ali@example.com'],
+            ['email' => 'ali1@example.com'],
             [
                 'name' => 'Ali',
                 'password' => bcrypt('112233'), // ضع كلمة مرور قوية في بيئة الإنتاج

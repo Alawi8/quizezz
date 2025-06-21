@@ -1,32 +1,87 @@
 {
-  "_userAuth-KD1KgvKP.js": {
-    "file": "assets/userAuth-KD1KgvKP.js",
+  "__plugin-vue_export-helper-DlAUqK2U.js": {
+    "file": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
+    "name": "_plugin-vue_export-helper"
+  },
+  "_axios-ty6bbf6K.js": {
+    "file": "assets/axios-ty6bbf6K.js",
+    "name": "axios",
+    "imports": [
+      "_userAuth-Bw2eZrmN.js"
+    ]
+  },
+  "_userAuth-Bw2eZrmN.js": {
+    "file": "assets/userAuth-Bw2eZrmN.js",
     "name": "userAuth"
+  },
+  "_vue-router-DJDVh-I8.js": {
+    "file": "assets/vue-router-DJDVh-I8.js",
+    "name": "vue-router",
+    "imports": [
+      "_userAuth-Bw2eZrmN.js"
+    ]
   },
   "resources/css/app.css": {
     "file": "assets/app-CpZug5r8.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/js/admin/app.js": {
+    "file": "assets/app-yYVMx9HC.js",
+    "name": "app",
+    "src": "resources/js/admin/app.js",
+    "isEntry": true,
+    "imports": [
+      "_userAuth-Bw2eZrmN.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_vue-router-DJDVh-I8.js"
+    ]
+  },
   "resources/js/composable/app.js": {
-    "file": "assets/app-CySYt9FI.js",
+    "file": "assets/app-15WML0IQ.js",
     "name": "app",
     "src": "resources/js/composable/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-KD1KgvKP.js"
+      "_userAuth-Bw2eZrmN.js"
     ]
   },
   "resources/js/entrypoints/app.js": {
-    "file": "assets/app-BZYrWF-0.js",
+    "file": "assets/app-CwQ1gn6m.js",
     "name": "app",
     "src": "resources/js/entrypoints/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-KD1KgvKP.js"
+      "_userAuth-Bw2eZrmN.js",
+      "_axios-ty6bbf6K.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_vue-router-DJDVh-I8.js"
+    ],
+    "dynamicImports": [
+      "resources/js/entrypoints/quiz/QuizPage.vue"
     ],
     "css": [
-      "assets/app-BRTmh6J9.css"
+      "assets/app-DZtoSSa8.css"
+    ]
+  },
+  "resources/js/entrypoints/quiz/QuizPage.vue": {
+    "file": "assets/QuizPage-GAPK9QF8.js",
+    "name": "QuizPage",
+    "src": "resources/js/entrypoints/quiz/QuizPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/quizezz-env/app.js": {
+    "file": "assets/app-D8y808mM.js",
+    "name": "app",
+    "src": "resources/js/quizezz-env/app.js",
+    "isEntry": true,
+    "imports": [
+      "_userAuth-Bw2eZrmN.js",
+      "_axios-ty6bbf6K.js",
+      "_vue-router-DJDVh-I8.js"
     ]
   }
 }
