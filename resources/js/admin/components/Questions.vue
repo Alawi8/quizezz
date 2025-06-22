@@ -1,7 +1,61 @@
 <template>
     <div class="max-w-6xl mx-auto p-6 space-y-8 relative" ref="scrollContainer">
         <!-- Header -->
-        <add-new-questions/>
+        <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-green-700">📋 Manage Questions</h2>
+            <button @click="toggleForm" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition">
+                <Plus class="inline w-4 h-4 mr-1" /> Add New Question
+            </button>
+        </div>
+
+        <!-- Flash Message -->
+        <div v-if="flashMessage" :class="flashType === 'success' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700'" class="px-4 py-3 rounded">
+            {{ flashMessage }}
+        </div>
+
+        <!-- Filter -->
+        <div class="flex items-center gap-4">
+            <select v-model="selectedTestId" @change="resetAndFetch()" class="border border-green-300 rounded px-3 py-2">
+                <option value="">All Tests</option>
+                <option v-for="test in tests" :key="test.id" :value="test.id">{{ test.title }}</option>
+            </select>
+            <button @click="deleteAllQuestions" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+                <Trash class="inline w-4 h-4 mr-1" /> Delete All
+            </button>
+        </div>
+
+        <!-- Add Question Form -->
+        <div v-if="showForm" class="bg-white p-6 border border-green-300 rounded-lg shadow space-y-6">
+            <h2 class="text-xl font-semibold text-green-700">📝 New Question</h2>
+            <input v-model="newQuestion.question_text" type="text" class="w-full border border-green-300 px-4 py-2 rounded" placeholder="Enter question text">
+
+            <select v-model="newQuestion.test_id" class="w-full border border-green-300 px-4 py-2 rounded">
+                <option value="">Select Test</option>
+                <option v-for="test in tests" :key="test.id" :value="test.id">{{ test.title }}</option>
+            </select>
+
+            <div class="space-y-3">
+                <div v-for="(answer, index) in newQuestion.answers" :key="answer.id" class="flex items-center gap-2">
+                    <input v-model="answer.answer_text" type="text" class="w-full border border-green-300 px-3 py-2 rounded" placeholder="Answer option">
+                    <label class="flex items-center gap-1 text-sm text-green-700">
+                        <input type="radio" :checked="answer.is_correct" @change="setCorrect(index)" /> Correct
+                    </label>
+                    <button @click="removeAnswer(index)" class="text-red-500 hover:underline text-sm">
+                        <Trash class="inline w-4 h-4" />
+                    </button>
+                </div>
+                <button @click="addAnswer" class="text-green-700 text-sm hover:underline">
+                    <Plus class="inline w-4 h-4 mr-1" /> Add Answer
+                </button>
+            </div>
+
+            <div class="text-right">
+                <button @click="addQuestion" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">
+                    <Folder class="inline w-4 h-4 mr-1" /> Save
+                </button>
+            </div>
+        </div>
+
         <!-- Question List -->
         <div class="space-y-4">
             <div v-for="q in questions" :key="q.id" class="bg-white border border-green-300 rounded-lg shadow-sm p-5 space-y-4">
@@ -84,7 +138,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
 import { Plus, Trash, Edit, Folder } from 'lucide-vue-next'
-import AddNewQuestions from "@/admin/components/questions/add-new-questions.vue";
 
 const scrollContainer = ref(null)
 const loadMoreRef = ref(null)
@@ -169,7 +222,16 @@ onUnmounted(() => {
     }
 })
 
-
+const addQuestion = async () => {
+    try {
+        const res = await axios.post('/api/admin/questions', newQuestion.value)
+        questions.value.unshift(res.data)
+        setFlash('✅ Question added successfully')
+        resetForm()
+    } catch (e) {
+        setFlash('❌ Failed to add question', 'error')
+    }
+}
 
 const updateQuestion = async () => {
     try {
@@ -219,10 +281,22 @@ const edit = (q) => {
     showForm.value = false
 }
 
+const toggleForm = () => {
+    showForm.value = !showForm.value
+    if (!showForm.value) resetForm()
+}
+
 const setCorrect = (index) => {
     newQuestion.value.answers.forEach((a, i) => a.is_correct = i === index)
 }
 
+const addAnswer = () => {
+    newQuestion.value.answers.push({ id: Date.now() + Math.random(), answer_text: '', is_correct: false })
+}
+
+const removeAnswer = (index) => {
+    newQuestion.value.answers.splice(index, 1)
+}
 
 const confirmDelete = (q) => {
     deletingQuestion.value = q
@@ -251,6 +325,8 @@ const getTestTitle = (id) => {
     const found = tests.value.find(t => t.id === id)
     return found ? found.title : 'Unknown'
 }
+
+
 </script>
 
 <style scoped></style>
