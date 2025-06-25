@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Header from "@/admin/layouts/script.js";
+import Header from "@/admin/layouts/Header.vue";
 </script>
 
 <template>

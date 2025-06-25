@@ -3,68 +3,22 @@
         <Header :duration="test?.duration" @time-up="handleTestEnd" />
 
         <div v-if="!testEnded && questionsVisible" class="flex flex-row gap-4">
-            <div class="question-scroll w-20 h-screen overflow-y-auto flex flex-col gap-2 p-2 items-center border rounded">
-                <button
-                    v-for="(q, i) in questions"
-                    :key="q.id"
-                    @click="currentIndex = i"
-                    :class="[
-                        'w-10 h-10 rounded-full border text-sm font-bold flex items-center justify-center shrink-0',
-                        currentIndex === i
-                            ? 'bg-green-600 text-white'
-                            : userAnswers[q.id]
-                            ? 'bg-blue-100 text-blue-800 border-blue-400'
-                            : 'bg-white text-green-600 border-green-600'
-                    ]"
-                >
-                    {{ i + 1 }}
-                </button>
-            </div>
-
-            <div class="flex-1 w-full">
-                <div v-if="currentQuestion" class="p-4 border rounded shadow">
-                    <div v-if="flashMessage" class="mb-4">
-                        <div
-                            :class="flashError ? 'bg-red-100 text-red-800 border border-red-300' : 'bg-green-100 text-green-800 border border-green-300'"
-                            class="px-4 py-2 rounded transition-opacity duration-300"
-                        >
-                            {{ flashMessage }}
-                        </div>
-                    </div>
-
-                    <h2 class="text-lg md:text-xl font-semibold mb-4">
-                        {{ currentIndex + 1 }}. {{ currentQuestion.question_text }}
-                    </h2>
-
-                    <ul class="space-y-4 w-full">
-                        <li
-                            v-for="(answer, index) in currentQuestion.answers"
-                            :key="answer.id"
-                            class="w-full"
-                            @contextmenu.prevent="strikeAnswer(answer)"
-                        >
-                            <label
-                                class="flex items-center space-x-4 w-full p-4 border rounded-lg cursor-pointer transition-all duration-300 text-lg"
-                                :class="[
-                                    strikedAnswers.includes(answer.id)
-                                        ? 'line-through bg-red-500 text-white opacity-75 border-red-400'
-                                        : userAnswers[currentQuestion.id] === answer.id
-                                        ? 'bg-green-600 text-white border-green-700'
-                                        : 'bg-white text-green-800 border-green-300 hover:bg-gray-100'
-                                ]"
-                                @click="selectAnswer(answer)"
-                            >
-                                <span class="font-bold text-lg">
-                                    {{ String.fromCharCode(65 + index) }}.
-                                </span>
-                                <span class="flex-1">{{ answer.answer_text }}</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-
-                <div v-else class="text-gray-500 mt-4">Loading...</div>
-            </div>
+            <QuestionsList
+                :questions="questions"
+                :currentIndex="currentIndex"
+                :userAnswers="userAnswers"
+                :changeQuestion="changeQuestion"
+            />
+            <QuestionComponent
+                v-if="currentQuestion"
+                :question="currentQuestion"
+                :questionIndex="currentIndex"
+                :selectedAnswer="selectedAnswer"
+                :userAnswers="userAnswers"
+                :strikedAnswers="strikedAnswers"
+                :selectAnswer="selectAnswer"
+                :strikeAnswer="strikeAnswer"
+            />
         </div>
 
         <div v-if="testEnded" class="text-center mt-10 text-green-600 text-xl font-bold">
@@ -76,64 +30,64 @@
 </template>
 
 <script setup>
-import { provide, ref, onMounted, computed, nextTick } from 'vue'
-import axios from '@/auth/axios'
-import useUserAuth from '@/composable/userAuth.js'
-import Header from '@/quizezz-env/layouts/Header.vue'
-import Footer from '@/quizezz-env/layouts/Footer.vue'
+import { ref, computed, onMounted, provide, watch } from 'vue';
+import axios from '@/auth/axios';
+import useUserAuth from '@/composable/userAuth.js';
+import Header from '@/quizezz-env/layouts/Header.vue';
+import Footer from '@/quizezz-env/layouts/Footer.vue';
+import QuestionsList from '@/quizezz-env/components/quiz/QuestionsList.vue';
+import QuestionComponent from '@/quizezz-env/components/quiz/QuestionComponent.vue';
+import { useRouter } from 'vue-router';
+// ...existing code...
+const router = useRouter();
+const currentIndex = ref(0);
+const selectedAnswer = ref(null);
+const strikedAnswers = ref([]);
+const flashMessage = ref(null);
+const flashError = ref(false);
+const userAnswers = ref({});
 
-const currentIndex = ref(0)
-const selectedAnswer = ref(null)
-const strikedAnswers = ref([])
-const flashMessage = ref(null)
-const flashError = ref(false)
-const userAnswers = ref({})
+const { token } = useUserAuth();
+const questions = ref([]);
+const test = ref(null);
+const testEnded = ref(false);
+const questionsVisible = ref(true);
+const endMessage = ref('');
 
-const { token } = useUserAuth()
-const questions = ref([])
-const error = ref(null)
-const currentQuestion = computed(() => questions.value[currentIndex.value])
+const currentQuestion = computed(() => questions.value[currentIndex.value] || null);
 
-const test = ref(null)
-const testEnded = ref(false)
-const questionsVisible = ref(true)
-const endMessage = ref('')
+// عند تغيير السؤال، حدث الإجابة المختارة والإجابات المشطوبة
+watch(currentIndex, () => {
+    syncSelectedAnswer();
+    strikedAnswers.value = [];
+});
 
+// ...existing code...
 function handleTestEnd() {
-    testEnded.value = true
-    questionsVisible.value = false
-    endMessage.value = '✅ The test has ended. Thank you for your participation.'
-}
+    testEnded.value = true;
+    questionsVisible.value = false;
+    endMessage.value = '✅ The test has ended. Thank you for your participation.';
 
-function getTestIdFromUrl() {
-    const parts = window.location.pathname.split('/')
-    return parts[parts.length - 1] || null
-}
+    // حفظ الإجابات في localStorage
+    localStorage.setItem('userAnswers', JSON.stringify(userAnswers.value));
+    localStorage.setItem('testId', getTestIdFromUrl());
 
-const testId = getTestIdFromUrl()
+    // الانتقال إلى صفحة النتائج
+    router.push({ name: 'ResultPage' });
+}
+// ...existing code...
 
 async function fetchQuestions() {
+    const testId = getTestIdFromUrl();
     try {
-        if (!testId) throw new Error('Test ID not found in URL.')
         const res = await axios.get(`/api/student/question/${testId}`, {
             headers: { Authorization: `Bearer ${token.value}` }
-        })
-        const shuffled = res.data.data.sort(() => 0.5 - Math.random())
-        questions.value = shuffled
-        await fetchUserAnswers()
-        await nextTick(() => {
-            scrollToQuestion(currentIndex.value)
-            syncSelectedAnswer()
-        })
-
-        const testRes = await axios.get(`/api/test`, {
-            headers: { Authorization: `Bearer ${token.value}` }
-        })
-        test.value = testRes.data
-
+        });
+        questions.value = res.data.data || [];
+        await fetchUserAnswers();
+        syncSelectedAnswer();
     } catch (err) {
-        error.value = err.response?.data?.message || err.message || 'Error loading questions'
-        console.error('Fetch Error:', error.value)
+        console.error('Fetch Error:', err);
     }
 }
 
@@ -141,35 +95,26 @@ async function fetchUserAnswers() {
     try {
         const res = await axios.get(`/api/student/user-answers`, {
             headers: { Authorization: `Bearer ${token.value}` }
-        })
-        userAnswers.value = res.data || {}
+        });
+        userAnswers.value = res.data || {};
+        syncSelectedAnswer();
     } catch (err) {
-        console.error('Failed to fetch user answers')
+        console.error('Failed to fetch user answers:', err);
     }
 }
 
-function syncSelectedAnswer() {
-    const savedAnswer = userAnswers.value[currentQuestion.value?.id]
-    selectedAnswer.value = savedAnswer || null
-}
-
-function resetSelections() {
-    strikedAnswers.value = []
-    flashMessage.value = null
-    flashError.value = false
-}
-
 function selectAnswer(answer) {
-    selectedAnswer.value = answer.id
-    strikedAnswers.value = []
-    submitAnswer(currentQuestion.value.id, answer.id)
+    selectedAnswer.value = answer.id;
+    submitAnswer(currentQuestion.value.id, answer.id);
+    // بعد اختيار إجابة، امسح الإجابات المشطوبة
+    strikedAnswers.value = [];
 }
 
 function strikeAnswer(answer) {
     if (!strikedAnswers.value.includes(answer.id)) {
-        strikedAnswers.value.push(answer.id)
+        strikedAnswers.value.push(answer.id);
     } else {
-        strikedAnswers.value = strikedAnswers.value.filter(id => id !== answer.id)
+        strikedAnswers.value = strikedAnswers.value.filter(id => id !== answer.id);
     }
 }
 
@@ -179,48 +124,69 @@ async function submitAnswer(questionId, answerId) {
             `/api/student/submit-answer`,
             { question_id: questionId, answer_id: answerId },
             { headers: { Authorization: `Bearer ${token.value}` } }
-        )
-        flashMessage.value = res.data?.message || '✅ Answer submitted successfully'
-        flashError.value = false
-        userAnswers.value[questionId] = answerId
-        selectedAnswer.value = answerId
+        );
+        flashMessage.value = res.data?.message || '✅ Answer submitted successfully';
+        flashError.value = false;
+        // حدث الإجابة في userAnswers
+        userAnswers.value[questionId] = answerId;
     } catch (err) {
-        flashMessage.value = err.response?.data?.message || '❌ Failed to submit answer'
-        flashError.value = true
-        console.error('Submit error:', err)
+        flashMessage.value = err.response?.data?.message || '❌ Failed to submit answer';
+        flashError.value = true;
+        console.error('Submit error:', err);
     }
 
     setTimeout(() => {
-        flashMessage.value = null
-    }, 3000)
+        flashMessage.value = null;
+    }, 3000);
+}
+
+function syncSelectedAnswer() {
+    // لاحظ: يجب التأكد من وجود currentQuestion
+    if (currentQuestion.value && userAnswers.value) {
+        selectedAnswer.value = userAnswers.value[currentQuestion.value.id] ?? null;
+    } else {
+        selectedAnswer.value = null;
+    }
 }
 
 function scrollToQuestion(index) {
-    const buttons = document.querySelectorAll('.question-scroll button')
-    if (buttons[index]) {
-        buttons[index].scrollIntoView({ behavior: 'smooth', block: 'center' })
+    setTimeout(() => {
+        const buttons = document.querySelectorAll('.question-scroll button');
+        if (buttons[index]) {
+            buttons[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }, 100); // تأخير بسيط لضمان التحديث
+}
+
+function getTestIdFromUrl() {
+    const parts = window.location.pathname.split('/');
+    return parts[parts.length - 1] || null;
+}
+
+function changeQuestion(index) {
+    currentIndex.value = index;
+    scrollToQuestion(index);
+}
+
+function nextQuestion() {
+    if (currentIndex.value < questions.value.length - 1) {
+        currentIndex.value++;
+        scrollToQuestion(currentIndex.value);
     }
 }
 
-provide('prevQuestion', () => {
+function prevQuestion() {
     if (currentIndex.value > 0) {
-        currentIndex.value--
-        scrollToQuestion(currentIndex.value)
-        resetSelections()
-        syncSelectedAnswer()
+        currentIndex.value--;
+        scrollToQuestion(currentIndex.value);
     }
-})
+}
 
-provide('nextQuestion', () => {
-    if (currentIndex.value < questions.value.length - 1) {
-        currentIndex.value++
-        scrollToQuestion(currentIndex.value)
-        resetSelections()
-        syncSelectedAnswer()
-    }
-})
+// توفير دوال التنقل للفوتر عبر provide
+provide('nextQuestion', nextQuestion);
+provide('prevQuestion', prevQuestion);
 
-onMounted(fetchQuestions)
+onMounted(fetchQuestions);
 </script>
 
 <style scoped>

@@ -16,24 +16,24 @@ class userAnswersController extends Controller
                 'question_id' => 'required|uuid|exists:questions,id',
                 'answer_id'   => 'required|uuid|exists:answers,id',
             ]);
-    
+
             $answer = Answer::where('id', $validated['answer_id'])
                 ->where('question_id', $validated['question_id'])
                 ->first();
-    
+
             if (!$answer) {
                 return response()->json([
                     'message' => 'Invalid answer for this question.'
                 ], 422);
             }
-    
+
             $userId = Auth::id();
             if (!$userId) {
                 return response()->json([
                     'message' => 'Unauthorized'
                 ], 401);
             }
-    
+
             UserAnswer::updateOrCreate(
                 [
                     'user_id'     => $userId,
@@ -44,7 +44,7 @@ class userAnswersController extends Controller
                     'is_correct'  => $answer->is_correct,
                 ]
             );
-    
+
             return response()->json([
                 'message' => 'Answer saved successfully.',
                 'correct' => $answer->is_correct,
@@ -63,14 +63,14 @@ class userAnswersController extends Controller
 
         $answers = UserAnswer::where('user_id', $userId)
             ->select('question_id', 'answer_id')
-            ->with('answer')
             ->get()
             ->mapWithKeys(function ($item) {
-                return [$item->question_id => $item->answer->answer_text];
+                return [$item->question_id => $item->answer_id];
             });
 
         return response()->json($answers);
     }
+
 
     public function clearAnswers(Request $request)
     {

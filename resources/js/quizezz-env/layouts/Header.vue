@@ -1,6 +1,16 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
-import { AlarmClock, XCircle, LogOut } from 'lucide-vue-next'
+import {
+    AlarmClock,
+    XCircle,
+    LogOut,
+    BarChart2,
+    FileText,
+    FolderOpen,
+    Settings,
+    LayoutDashboard
+} from 'lucide-vue-next'
+import Navbar from "@/quizezz-env/layouts/Navbar.vue";
 
 const props = defineProps({
     duration: Number // مدة الاختبار بالثواني
@@ -42,24 +52,40 @@ onMounted(() => {
 </script>
 
 <template>
-    <header class="bg-black text-white p-4 rounded-b-xl shadow-md w-full">
-        <div class="flex flex-wrap md:flex-nowrap items-center justify-between gap-4">
-            <!-- Timer -->
+    <header
+        class="sticky top-0 z-50 bg-black text-white m-0 p-0 w-full shadow-md rounded-b-xl rounded-t-none border-b border-white/10"
+    >
+
+
+        <!-- Main Header Section -->
+        <div
+            class="flex items-center justify-between flex-wrap gap-4 px-4 py-2"
+        >
+            <!-- Section Icon and Info -->
             <div class="flex items-center gap-2">
-                <AlarmClock class="w-5 h-5 text-white" />
-                <span>{{ formatTime(timeLeft) }}</span>
+                <LayoutDashboard class="w-6 h-6 text-white hover:text-green-400 transition duration-200" />
+                <span class="text-sm">قسم الأسئلة</span>
             </div>
 
-            <!-- End Test Icon -->
-            <div v-if="testEnded" class="flex items-center gap-2 text-red-500 font-bold">
-                <XCircle class="w-5 h-5" />
-                <span>The test has ended</span>
+            <!-- Timer -->
+            <div class="flex items-center gap-2 mx-auto">
+                <AlarmClock class="w-6 h-6 text-white animate-pulse" />
+                <span class="text-base font-semibold tracking-wide">{{ formatTime(timeLeft) }}</span>
             </div>
 
-            <!-- Exit Button or other control -->
-            <div class="flex items-center gap-2 ml-auto">
-                <LogOut class="w-5 h-5 text-white cursor-pointer" title="Exit Test" />
-            </div>
+            <!-- Exit / End Icon -->
+            <a href="/" class="flex items-center gap-3">
+                <template v-if="testEnded">
+                    <XCircle class="w-6 h-6 text-red-500 hover:scale-110 transition duration-200" title="Test Ended" />
+                </template>
+                <LogOut
+                    class="w-6 h-6 text-white cursor-pointer hover:text-red-400 transition duration-200"
+                    title="Exit Test"
+                />
+            </a>
         </div>
     </header>
 </template>
+
+
+

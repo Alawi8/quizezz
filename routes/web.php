@@ -35,7 +35,25 @@ Route::prefix('/')->group(function () {
 Route::get('/questions/{id}', function ($id) {
     return view('frontend.questions', ['id'=>$id ]);
 });
+
+Route::get('/questions/{id}/{any}', function ($id) {
+    return view('frontend.questions', ['id'=>$id ]);
+});
 // DISPLAY SECTIONS BY ID
 Route::get('/test/{id}', function ($id) {
     return view('frontend.test', ['id' => $id]);
 });
+
+
+use App\Models\Test;
+
+Route::get('/test-section/{id}', function ($id) {
+    $section = Test::findOrFail($id);
+    return response()->json([
+        'id' => $section->id,
+        'title' => $section->title,
+        'duration' => $section->duration,
+        'questions' => $section->questions,
+    ]);
+});
+

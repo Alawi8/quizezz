@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject , ref } from 'vue'
+import { inject, ref } from 'vue'
 import {
     Settings, HelpCircle, Calculator, ChevronRight,
     ChevronLeft, Filter, MessageCircle, Flag

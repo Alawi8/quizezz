@@ -1,12 +1,11 @@
-<script setup lang="ts">
-
-import QuizPage from "@/quizezz-env/components/QuizPage.vue";
-</script>
-
 <template>
-    <QuizPage/>
+    <Navbar/>
+    <router-view />
 </template>
 
-<style scoped>
+<script setup>
+    import QuizPage from "@/quizezz-env/components/QuizPage.vue";
+    import Navbar from "@/quizezz-env/layouts/Navbar.vue";
 
-</style>
+    const data = ['s', 's']
+</script>
