@@ -4,7 +4,7 @@ const isLocal = window.location.hostname === 'localhost' || window.location.host
 
 axios.defaults.baseURL = isLocal
   ? 'http://127.0.0.1:8000'
-  : 'https://api.meshcah.net' // ← غيّر هذا حسب نطاق الـ API الحقيقي بعد رفعه
+  : 'https://Exam.meshcah.net' // ← غيّر هذا حسب نطاق الـ API الحقيقي بعد رفعه
 
 axios.defaults.withCredentials = true
 
