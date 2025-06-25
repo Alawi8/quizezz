@@ -1,4 +1,4 @@
-import{e as te,J as ct,s as Ge,j as Q,K as at,x as L,D as ue,r as lt,z as ut,I as De,L as ft,B as q,M as ht}from"./userAuth-Cdll0KS5.js";var Ke;const ke=(Ke=document.querySelector('meta[name="csrf-token"]'))==null?void 0:Ke.getAttribute("content");te.defaults.withCredentials=!0;te.defaults.headers.common["X-Requested-With"]="XMLHttpRequest";te.defaults.headers.common.Accept="application/json";ke&&(te.defaults.headers.common["X-CSRF-TOKEN"]=ke);/*!
+import{e as te,J as ct,s as Ge,j as Q,K as at,x as L,D as ue,r as lt,z as ut,I as De,L as ft,B as q,M as ht}from"./userAuth-Bzkke8O3.js";var Ke;const ke=(Ke=document.querySelector('meta[name="csrf-token"]'))==null?void 0:Ke.getAttribute("content");te.defaults.withCredentials=!0;te.defaults.headers.common["X-Requested-With"]="XMLHttpRequest";te.defaults.headers.common.Accept="application/json";ke&&(te.defaults.headers.common["X-CSRF-TOKEN"]=ke);/*!
   * vue-router v4.5.1
   * (c) 2025 Eduardo San Martin Morote
   * @license MIT
