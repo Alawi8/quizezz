@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import useUserAuth from '@/composable/userAuth'
 
 const { user, login, logout, init } = useUserAuth()
@@ -76,19 +76,44 @@ const password = ref('')
 const error = ref(null)
 
 onMounted(async () => {
-    await init()
+  await init()
+})
+
+// 🧠 مراقبة التغييرات وإغلاق النوافذ الأخرى تلقائيًا
+watch(showLogin, (val) => {
+  if (val) {
+    navOpen.value = false
+    dropdownOpen.value = false
+  }
+})
+
+watch(dropdownOpen, (val) => {
+  if (val) {
+    navOpen.value = false
+    showLogin.value = false
+  }
+})
+
+watch(navOpen, (val) => {
+  if (val) {
+    dropdownOpen.value = false
+    showLogin.value = false
+  }
 })
 
 async function loginHandler() {
-    error.value = null
-    await login(email.value, password.value)
-    if (!user.value) {
-        error.value = 'Login failed'
-    } else {
-        showLogin.value = false
-    }
+  error.value = null
+  await login(email.value, password.value)
+  if (!user.value) {
+    error.value = 'Login failed'
+  } else {
+    showLogin.value = false
+    email.value = ''
+    password.value = ''
+  }
 }
 </script>
+
 
 <style scoped>
 .animate-fade-in {
