@@ -3,23 +3,23 @@
     "file": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
     "name": "_plugin-vue_export-helper"
   },
-  "_settings-Co_56Sg_.js": {
-    "file": "assets/settings-Co_56Sg_.js",
+  "_axios-CFKh4b2I.js": {
+    "file": "assets/axios-CFKh4b2I.js",
+    "name": "axios",
+    "imports": [
+      "_userAuth-Yh9Tnyae.js"
+    ]
+  },
+  "_settings-CqLbObR9.js": {
+    "file": "assets/settings-CqLbObR9.js",
     "name": "settings",
     "imports": [
-      "_userAuth-Bzkke8O3.js"
+      "_userAuth-Yh9Tnyae.js"
     ]
   },
-  "_userAuth-Bzkke8O3.js": {
-    "file": "assets/userAuth-Bzkke8O3.js",
+  "_userAuth-Yh9Tnyae.js": {
+    "file": "assets/userAuth-Yh9Tnyae.js",
     "name": "userAuth"
-  },
-  "_vue-router-CGpQckM_.js": {
-    "file": "assets/vue-router-CGpQckM_.js",
-    "name": "vue-router",
-    "imports": [
-      "_userAuth-Bzkke8O3.js"
-    ]
   },
   "resources/css/app.css": {
     "file": "assets/app-CqDdqqWQ.css",
@@ -27,48 +27,48 @@
     "isEntry": true
   },
   "resources/js/admin/app.js": {
-    "file": "assets/app-BtxfOCIJ.js",
+    "file": "assets/app-B2iGJMVv.js",
     "name": "app",
     "src": "resources/js/admin/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-Bzkke8O3.js",
-      "_settings-Co_56Sg_.js",
-      "_vue-router-CGpQckM_.js"
+      "_userAuth-Yh9Tnyae.js",
+      "_settings-CqLbObR9.js",
+      "_axios-CFKh4b2I.js"
     ]
   },
   "resources/js/composable/app.js": {
-    "file": "assets/app-CCYH0PrX.js",
+    "file": "assets/app-ChYXOahw.js",
     "name": "app",
     "src": "resources/js/composable/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-Bzkke8O3.js"
+      "_userAuth-Yh9Tnyae.js"
     ]
   },
   "resources/js/entrypoints/app.js": {
-    "file": "assets/app-uHJlfoot.js",
+    "file": "assets/app-btdetGXQ.js",
     "name": "app",
     "src": "resources/js/entrypoints/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-Bzkke8O3.js",
-      "_vue-router-CGpQckM_.js",
-      "__plugin-vue_export-helper-DlAUqK2U.js"
+      "_userAuth-Yh9Tnyae.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_axios-CFKh4b2I.js"
     ],
     "css": [
-      "assets/app-gJ15pUzX.css"
+      "assets/app-BCIcqDJe.css"
     ]
   },
   "resources/js/quizezz-env/app.js": {
-    "file": "assets/app-CxuVHdaC.js",
+    "file": "assets/app-D_OY4-IT.js",
     "name": "app",
     "src": "resources/js/quizezz-env/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-Bzkke8O3.js",
-      "_vue-router-CGpQckM_.js",
-      "_settings-Co_56Sg_.js",
+      "_userAuth-Yh9Tnyae.js",
+      "_axios-CFKh4b2I.js",
+      "_settings-CqLbObR9.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
