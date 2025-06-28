@@ -1,72 +1,72 @@
 {
-  "_axios-On_PV_-i.js": {
-    "file": "assets/axios-On_PV_-i.js",
+  "_axios-BvbHwZdJ.js": {
+    "file": "assets/axios-BvbHwZdJ.js",
     "name": "axios",
     "imports": [
-      "_userAuth-CKIwDY4H.js"
+      "_userAuth-ePuvi46N.js"
     ]
   },
-  "_settings-CHThbMzB.js": {
-    "file": "assets/settings-CHThbMzB.js",
+  "_settings-BK9bgRgD.js": {
+    "file": "assets/settings-BK9bgRgD.js",
     "name": "settings",
     "imports": [
-      "_userAuth-CKIwDY4H.js"
+      "_userAuth-ePuvi46N.js"
     ]
   },
-  "_userAuth-CKIwDY4H.js": {
-    "file": "assets/userAuth-CKIwDY4H.js",
+  "_userAuth-ePuvi46N.js": {
+    "file": "assets/userAuth-ePuvi46N.js",
     "name": "userAuth"
   },
   "resources/css/app.css": {
-    "file": "assets/app-D2cZnkpV.css",
+    "file": "assets/app-CRm5JKzb.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/admin/app.js": {
-    "file": "assets/app-C7uIwTEe.js",
+    "file": "assets/app-DbQ3UGJy.js",
     "name": "app",
     "src": "resources/js/admin/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-CKIwDY4H.js",
-      "_axios-On_PV_-i.js",
-      "_settings-CHThbMzB.js"
+      "_userAuth-ePuvi46N.js",
+      "_axios-BvbHwZdJ.js",
+      "_settings-BK9bgRgD.js"
     ],
     "css": [
       "assets/app-BXYw-G5n.css"
     ]
   },
   "resources/js/composable/app.js": {
-    "file": "assets/app-BMgAXuIN.js",
+    "file": "assets/app-C20kMxTd.js",
     "name": "app",
     "src": "resources/js/composable/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-CKIwDY4H.js"
+      "_userAuth-ePuvi46N.js"
     ]
   },
   "resources/js/entrypoints/app.js": {
-    "file": "assets/app-B5vV8vI-.js",
+    "file": "assets/app-C-1fuZX3.js",
     "name": "app",
     "src": "resources/js/entrypoints/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-CKIwDY4H.js",
-      "_axios-On_PV_-i.js"
+      "_userAuth-ePuvi46N.js",
+      "_axios-BvbHwZdJ.js"
     ],
     "css": [
-      "assets/app-GamgiTn6.css"
+      "assets/app-BkoyNF5H.css"
     ]
   },
   "resources/js/quizezz-env/app.js": {
-    "file": "assets/app-BYICNemu.js",
+    "file": "assets/app-ChlXlujg.js",
     "name": "app",
     "src": "resources/js/quizezz-env/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-CKIwDY4H.js",
-      "_axios-On_PV_-i.js",
-      "_settings-CHThbMzB.js"
+      "_userAuth-ePuvi46N.js",
+      "_axios-BvbHwZdJ.js",
+      "_settings-BK9bgRgD.js"
     ],
     "css": [
       "assets/app-Dpzs7FEa.css"

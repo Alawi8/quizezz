@@ -3,7 +3,7 @@
       <Header/>
 
       <router-view />
-      <Test />
+
 
   </div>
 </template>
