@@ -1,0 +1,1 @@
+import{y as e}from"./userAuth-By76ZzTx.js";var o;const t=(o=document.querySelector('meta[name="csrf-token"]'))==null?void 0:o.getAttribute("content");e.defaults.withCredentials=!0;e.defaults.headers.common["X-Requested-With"]="XMLHttpRequest";e.defaults.headers.common.Accept="application/json";t&&(e.defaults.headers.common["X-CSRF-TOKEN"]=t);

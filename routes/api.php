@@ -63,6 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admin/questions/env', [EnvQuestionsController::class, 'index']);
         Route::get('/question/{test}/', [EnvQuestionsController::class, 'questionsByTest']);
         Route::get('/answers/{test_id}', [TestController::class, 'getQuestionsWithUserAnswers']);
+        //Route::get('/answers/{test_id}', [TestController::class, 'getQuestionsWithUserAnswers']);
     });
 
     // ✅ SUPER ADMIN ROUTES

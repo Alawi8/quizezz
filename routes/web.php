@@ -40,20 +40,8 @@ Route::get('/questions/{id}/{any}', function ($id) {
     return view('frontend.questions', ['id'=>$id ]);
 });
 // DISPLAY SECTIONS BY ID
-Route::get('/test/{id}', function ($id) {
-    return view('frontend.test', ['id' => $id]);
+Route::get('/duc', function () {
+    return view('frontend.test');
 });
 
-
-use App\Models\Test;
-
-Route::get('/test-section/{id}', function ($id) {
-    $section = Test::findOrFail($id);
-    return response()->json([
-        'id' => $section->id,
-        'title' => $section->title,
-        'duration' => $section->duration,
-        'questions' => $section->questions,
-    ]);
-});
 
