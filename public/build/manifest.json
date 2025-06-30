@@ -32,7 +32,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-B5yDa2Mh.css",
+    "file": "assets/app-DjAediou.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -61,7 +61,7 @@
     ]
   },
   "resources/js/entrypoints/app.js": {
-    "file": "assets/app-Djxb8JNQ.js",
+    "file": "assets/app-B3dBMhe_.js",
     "name": "app",
     "src": "resources/js/entrypoints/app.js",
     "isEntry": true,
@@ -72,11 +72,11 @@
       "_folder-open-BAQaig3j.js"
     ],
     "css": [
-      "assets/app-Cb2Pts5E.css"
+      "assets/app-Bb1aWH0l.css"
     ]
   },
   "resources/js/quizezz-env/app.js": {
-    "file": "assets/app-Bdy0DD7l.js",
+    "file": "assets/app-EgDJ1B-x.js",
     "name": "app",
     "src": "resources/js/quizezz-env/app.js",
     "isEntry": true,
@@ -87,7 +87,7 @@
       "_x-DrPRQ0ev.js"
     ],
     "css": [
-      "assets/app-CNACLyhl.css"
+      "assets/app-BtxvVggF.css"
     ]
   }
 }
