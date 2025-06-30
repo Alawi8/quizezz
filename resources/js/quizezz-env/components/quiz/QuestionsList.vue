@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border-b border-gray-200 dark:border-gray-700">
       <h3 class="text-sm font-semibold text-gray-900 dark:text-white text-center">
-        Questions
+        
       </h3>
       <div class="mt-2 text-xs text-gray-600 dark:text-gray-400 text-center">
         {{ answeredCount }} / {{ questions.length }} answered
@@ -79,55 +79,7 @@
       </div>
     </div>
 
-    <!-- Legend -->
-    <div class="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
-      <div class="space-y-2">
-        <div class="flex items-center justify-between text-xs">
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 bg-green-500 rounded"></div>
-            <span class="text-gray-600 dark:text-gray-400">Answered</span>
-          </div>
-          <span class="font-medium text-gray-700 dark:text-gray-300">{{ answeredCount }}</span>
-        </div>
-        
-        <div class="flex items-center justify-between text-xs">
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 bg-gray-400 rounded"></div>
-            <span class="text-gray-600 dark:text-gray-400">Unanswered</span>
-          </div>
-          <span class="font-medium text-gray-700 dark:text-gray-300">{{ unansweredCount }}</span>
-        </div>
-        
-        <div class="flex items-center justify-between text-xs">
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 bg-red-500 rounded"></div>
-            <span class="text-gray-600 dark:text-gray-400">Bookmarked</span>
-          </div>
-          <span class="font-medium text-gray-700 dark:text-gray-300">{{ bookmarkedCount }}</span>
-        </div>
-      </div>
 
-      <!-- Quick Actions -->
-      <div class="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600">
-        <div class="grid grid-cols-2 gap-2">
-          <button
-            @click="goToFirstUnanswered"
-            class="px-2 py-1 text-xs bg-orange-100 hover:bg-orange-200 dark:bg-orange-900/20 dark:hover:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded transition-colors duration-200"
-            :disabled="unansweredCount === 0"
-          >
-            Next Unanswered
-          </button>
-          
-          <button
-            @click="goToFirstBookmarked"
-            class="px-2 py-1 text-xs bg-red-100 hover:bg-red-200 dark:bg-red-900/20 dark:hover:bg-red-900/30 text-red-700 dark:text-red-400 rounded transition-colors duration-200"
-            :disabled="bookmarkedCount === 0"
-          >
-            Bookmarked
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 

@@ -12,51 +12,33 @@
             <div v-if="showLogin" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40"></div>
         </transition>
 
-        <header class="relative bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white shadow-2xl sticky top-0 z-50 rounded-2xl mx-4 mt-4 backdrop-blur-lg border border-white border-opacity-20">
+        <header class="relative bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white shadow-2xl sticky top-0 z-50 rounded-2xl mx-2 sm:mx-4 mt-2 sm:mt-4 backdrop-blur-lg border border-white border-opacity-20">
             <!-- Decorative Background Elements -->
             <div class="absolute inset-0 overflow-hidden rounded-2xl">
-                <div class="absolute top-0 left-0 w-32 h-32 bg-white bg-opacity-10 rounded-full -translate-x-16 -translate-y-16 animate-pulse"></div>
-                <div class="absolute bottom-0 right-0 w-24 h-24 bg-white bg-opacity-10 rounded-full translate-x-12 translate-y-12 animate-pulse animation-delay-2000"></div>
-                <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-white bg-opacity-5 rounded-full animate-float"></div>
+                <div class="absolute top-0 left-0 w-20 sm:w-32 h-20 sm:h-32 bg-white bg-opacity-10 rounded-full -translate-x-10 sm:-translate-x-16 -translate-y-10 sm:-translate-y-16 animate-pulse"></div>
+                <div class="absolute bottom-0 right-0 w-16 sm:w-24 h-16 sm:h-24 bg-white bg-opacity-10 rounded-full translate-x-8 sm:translate-x-12 translate-y-8 sm:translate-y-12 animate-pulse animation-delay-2000"></div>
+                <div class="absolute top-1/2 left-1/4 w-12 sm:w-16 h-12 sm:h-16 bg-white bg-opacity-5 rounded-full animate-float"></div>
             </div>
 
-            <div class="relative max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="relative max-w-7xl mx-auto px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
                 <!-- Logo with Enhanced Animation -->
                 <div class="flex items-center group">
                     <div class="relative">
                         <div class="absolute inset-0 bg-white bg-opacity-20 rounded-xl blur-sm group-hover:bg-opacity-30 transition-all duration-300"></div>
-                        <div class="relative bg-white bg-opacity-10 backdrop-blur-sm rounded-xl px-4 py-2 border border-white border-opacity-30 group-hover:scale-105 transition-all duration-300">
-                            <div class="text-2xl font-extrabold tracking-wide bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent">
+                        <div class="relative bg-white bg-opacity-10 backdrop-blur-sm rounded-xl px-2 sm:px-4 py-1.5 sm:py-2 border border-white border-opacity-30 group-hover:scale-105 transition-all duration-300">
+                            <div class="text-lg sm:text-2xl font-extrabold tracking-wide bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent">
                                 QuizzApp
                             </div>
-                            <div class="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-ping opacity-75"></div>
+                            <div class="absolute -top-0.5 sm:-top-1 -right-0.5 sm:-right-1 w-2 sm:w-3 h-2 sm:h-3 bg-yellow-400 rounded-full animate-ping opacity-75"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Mobile Toggle with Enhanced Animation -->
-                <button 
-                    @click="toggleNav" 
-                    class="md:hidden relative group p-2 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-                >
-                    <div class="relative w-6 h-6">
-                        <span :class="['absolute top-0 left-0 w-6 h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center', navOpen ? 'rotate-45 translate-y-2.5' : '']"></span>
-                        <span :class="['absolute top-2.5 left-0 w-6 h-0.5 bg-white rounded-full transition-all duration-300', navOpen ? 'opacity-0' : 'opacity-100']"></span>
-                        <span :class="['absolute top-5 left-0 w-6 h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center', navOpen ? '-rotate-45 -translate-y-2.5' : '']"></span>
-                    </div>
-                </button>
-
-                <!-- Main Navigation with Enhanced Styling -->
-                <nav :class="[
-                    'transition-all duration-500 ease-in-out',
-                    navOpen 
-                        ? 'flex flex-col absolute top-full left-0 w-full bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 rounded-2xl mt-2 p-6 shadow-2xl border border-white border-opacity-20 backdrop-blur-lg animate-slideInDown' 
-                        : 'hidden md:flex md:gap-8 md:items-center'
-                ]">
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex gap-6 xl:gap-8 items-center">
                     <a 
                         href="/" 
-                        class="group relative px-4 py-2 text-white font-medium transition-all duration-300 hover:text-green-100 rounded-xl hover:bg-white hover:bg-opacity-10"
-                        @click="closeNav"
+                        class="group relative px-3 xl:px-4 py-2 text-white font-medium transition-all duration-300 hover:text-green-100 rounded-xl hover:bg-white hover:bg-opacity-10"
                     >
                         <span class="relative z-10">Home</span>
                         <div class="absolute inset-0 bg-white bg-opacity-0 group-hover:bg-opacity-20 rounded-xl transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
@@ -65,9 +47,7 @@
                     
                     <a 
                         href="/projects" 
-                        class="group relative px-4 py-2 text-white font-medium transition-all duration-300 hover:text-green-100 rounded-xl hover:bg-white hover:bg-opacity-10"
-                        style="animation-delay: 100ms"
-                        @click="closeNav"
+                        class="group relative px-3 xl:px-4 py-2 text-white font-medium transition-all duration-300 hover:text-green-100 rounded-xl hover:bg-white hover:bg-opacity-10"
                     >
                         <span class="relative z-10">My Projects</span>
                         <div class="absolute inset-0 bg-white bg-opacity-0 group-hover:bg-opacity-20 rounded-xl transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
@@ -76,9 +56,7 @@
                     
                     <a 
                         href="/tests" 
-                        class="group relative px-4 py-2 text-white font-medium transition-all duration-300 hover:text-green-100 rounded-xl hover:bg-white hover:bg-opacity-10"
-                        style="animation-delay: 200ms"
-                        @click="closeNav"
+                        class="group relative px-3 xl:px-4 py-2 text-white font-medium transition-all duration-300 hover:text-green-100 rounded-xl hover:bg-white hover:bg-opacity-10"
                     >
                         <span class="relative z-10">Quizzes</span>
                         <div class="absolute inset-0 bg-white bg-opacity-0 group-hover:bg-opacity-20 rounded-xl transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
@@ -86,134 +64,179 @@
                     </a>
                 </nav>
 
-                <!-- User Dropdown with Enhanced Design -->
-                <div v-if="user" class="relative ml-4">
-                    <button 
-                        @click="toggleDropdown" 
-                        class="group flex items-center gap-3 bg-white bg-opacity-90 backdrop-blur-sm text-green-700 font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:bg-opacity-100 transition-all duration-300 transform hover:scale-105 border border-white border-opacity-50"
-                    >
-                        <div class="w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                            {{ user.name.charAt(0).toUpperCase() }}
-                        </div>
-                        <span class="hidden sm:block">{{ user.name }}</span>
-                        <ChevronDownIcon :class="['w-4 h-4 transition-transform duration-300', dropdownOpen ? 'rotate-180' : '']" />
-                    </button>
-                    
-                    <transition
-                        enter-active-class="transition ease-out duration-200"
-                        enter-from-class="opacity-0 scale-95 translate-y-2"
-                        enter-to-class="opacity-100 scale-100 translate-y-0"
-                        leave-active-class="transition ease-in duration-150"
-                        leave-from-class="opacity-100 scale-100 translate-y-0"
-                        leave-to-class="opacity-0 scale-95 translate-y-2"
-                    >
-                        <div v-if="dropdownOpen" class="absolute right-0 mt-3 w-72 bg-white backdrop-blur-lg bg-opacity-95 text-green-700 rounded-2xl shadow-2xl py-4 px-2 border border-white border-opacity-30 animate-slideInDown">
-                            <!-- User Info Header -->
-                            <div class="px-4 py-3 border-b border-green-100">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold">
-                                        {{ user.name.charAt(0).toUpperCase() }}
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-800">{{ user.name }}</p>
-                                        <p class="text-sm text-gray-600">{{ user.email || 'user@example.com' }}</p>
+                <!-- Right Side - User/Auth Section -->
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <!-- User Dropdown (Desktop & Mobile) -->
+                    <div v-if="user" class="relative">
+                        <button 
+                            @click="toggleDropdown" 
+                            class="group flex items-center gap-2 sm:gap-3 bg-white bg-opacity-90 backdrop-blur-sm text-green-700 font-semibold px-3 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg hover:shadow-xl hover:bg-opacity-100 transition-all duration-300 transform hover:scale-105 border border-white border-opacity-50"
+                        >
+                            <div class="w-6 sm:w-8 h-6 sm:h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm">
+                                {{ user.name.charAt(0).toUpperCase() }}
+                            </div>
+                            <span class="hidden sm:block text-sm sm:text-base">{{ user.name }}</span>
+                            <ChevronDownIcon :class="['w-3 sm:w-4 h-3 sm:h-4 transition-transform duration-300', dropdownOpen ? 'rotate-180' : '']" />
+                        </button>
+                        
+                        <transition
+                            enter-active-class="transition ease-out duration-200"
+                            enter-from-class="opacity-0 scale-95 translate-y-2"
+                            enter-to-class="opacity-100 scale-100 translate-y-0"
+                            leave-active-class="transition ease-in duration-150"
+                            leave-from-class="opacity-100 scale-100 translate-y-0"
+                            leave-to-class="opacity-0 scale-95 translate-y-2"
+                        >
+                            <div v-if="dropdownOpen" class="absolute right-0 mt-3 w-64 sm:w-72 bg-white backdrop-blur-lg bg-opacity-95 text-green-700 rounded-2xl shadow-2xl py-4 px-2 border border-white border-opacity-30 animate-slideInDown">
+                                <!-- User Info Header -->
+                                <div class="px-4 py-3 border-b border-green-100">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                            {{ user.name.charAt(0).toUpperCase() }}
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <p class="font-semibold text-gray-800 text-sm sm:text-base truncate">{{ user.name }}</p>
+                                            <p class="text-xs sm:text-sm text-gray-600 truncate">{{ user.email || 'user@example.com' }}</p>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <!-- Menu Items -->
+                                <div class="py-2">
+                                    <a 
+                                        href="/profile" 
+                                        class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
+                                        @click="closeDropdown"
+                                    >
+                                        <ProfileIcon class="w-4 sm:w-5 h-4 sm:h-5 text-green-600 group-hover:text-green-700 flex-shrink-0" />
+                                        <span class="font-medium group-hover:text-green-800 text-sm sm:text-base">Profile</span>
+                                    </a>
+                                    
+                                    <a 
+                                        href="/my-projects" 
+                                        class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
+                                        @click="closeDropdown"
+                                    >
+                                        <ProjectsIcon class="w-4 sm:w-5 h-4 sm:h-5 text-green-600 group-hover:text-green-700 flex-shrink-0" />
+                                        <span class="font-medium group-hover:text-green-800 text-sm sm:text-base">My Projects</span>
+                                    </a>
+                                    
+                                    <a 
+                                        href="/settings" 
+                                        class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
+                                        @click="closeDropdown"
+                                    >
+                                        <SettingsIcon class="w-4 sm:w-5 h-4 sm:h-5 text-green-600 group-hover:text-green-700 flex-shrink-0" />
+                                        <span class="font-medium group-hover:text-green-800 text-sm sm:text-base">Settings</span>
+                                    </a>
+                                    
+                                    <a 
+                                        href="/admin/dashboard" 
+                                        class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
+                                        @click="closeDropdown"
+                                    >
+                                        <DashboardIcon class="w-4 sm:w-5 h-4 sm:h-5 text-green-600 group-hover:text-green-700 flex-shrink-0" />
+                                        <span class="font-medium group-hover:text-green-800 text-sm sm:text-base">Admin Dashboard</span>
+                                    </a>
+                                </div>
+
+                                <hr class="my-2 border-green-100">
+                                
+                                <button 
+                                    @click="handleLogout" 
+                                    class="group flex items-center gap-3 w-full text-left px-4 py-3 text-red-600 rounded-xl hover:bg-red-50 transition-all duration-200 mx-2 font-medium"
+                                >
+                                    <LogoutIcon class="w-4 sm:w-5 h-4 sm:h-5 flex-shrink-0" />
+                                    <span class="group-hover:text-red-700 text-sm sm:text-base">Logout</span>
+                                </button>
                             </div>
+                        </transition>
+                    </div>
 
-                            <!-- Menu Items -->
-                            <div class="py-2">
-                                <a 
-                                    href="/profile" 
-                                    class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
-                                    @click="closeDropdown"
-                                >
-                                    <ProfileIcon class="w-5 h-5 text-green-600 group-hover:text-green-700" />
-                                    <span class="font-medium group-hover:text-green-800">Profile</span>
-                                </a>
-                                
-                                <a 
-                                    href="/my-projects" 
-                                    class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
-                                    @click="closeDropdown"
-                                >
-                                    <ProjectsIcon class="w-5 h-5 text-green-600 group-hover:text-green-700" />
-                                    <span class="font-medium group-hover:text-green-800">My Projects</span>
-                                </a>
-                                
-                                <a 
-                                    href="/settings" 
-                                    class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
-                                    @click="closeDropdown"
-                                >
-                                    <SettingsIcon class="w-5 h-5 text-green-600 group-hover:text-green-700" />
-                                    <span class="font-medium group-hover:text-green-800">Settings</span>
-                                </a>
-                                
-                                <a 
-                                    href="/admin/dashboard" 
-                                    class="group flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-all duration-200 mx-2"
-                                    @click="closeDropdown"
-                                >
-                                    <DashboardIcon class="w-5 h-5 text-green-600 group-hover:text-green-700" />
-                                    <span class="font-medium group-hover:text-green-800">Admin Dashboard</span>
-                                </a>
-                            </div>
+                    <!-- Guest Links (Desktop) -->
+                    <div v-else class="hidden md:flex items-center gap-3">
+                        <button 
+                            @click="openLoginModal" 
+                            class="group relative overflow-hidden bg-white bg-opacity-90 backdrop-blur-sm text-green-700 px-4 lg:px-6 py-2 lg:py-3 rounded-full font-semibold hover:bg-opacity-100 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border border-white border-opacity-50 text-sm lg:text-base"
+                        >
+                            <div class="absolute inset-0 bg-gradient-to-r from-green-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <span class="relative">Login</span>
+                        </button>
+                        <a 
+                            href="/register" 
+                            class="group text-white font-medium px-3 lg:px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-300 relative text-sm lg:text-base"
+                        >
+                            <span class="relative">Register</span>
+                            <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></div>
+                        </a>
+                    </div>
 
-                            <hr class="my-2 border-green-100">
-                            
-                            <button 
-                                @click="handleLogout" 
-                                class="group flex items-center gap-3 w-full text-left px-4 py-3 text-red-600 rounded-xl hover:bg-red-50 transition-all duration-200 mx-2 font-medium"
-                            >
-                                <LogoutIcon class="w-5 h-5" />
-                                <span class="group-hover:text-red-700">Logout</span>
-                            </button>
-                        </div>
-                    </transition>
-                </div>
-
-                <!-- Guest Links with Enhanced Styling -->
-                <div v-else class="hidden md:flex items-center gap-4">
+                    <!-- Mobile Menu Toggle -->
                     <button 
-                        @click="openLoginModal" 
-                        class="group relative overflow-hidden bg-white bg-opacity-90 backdrop-blur-sm text-green-700 px-6 py-3 rounded-full font-semibold hover:bg-opacity-100 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border border-white border-opacity-50"
+                        @click="toggleNav" 
+                        class="lg:hidden relative group p-2 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
                     >
-                        <div class="absolute inset-0 bg-gradient-to-r from-green-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <span class="relative">Login</span>
+                        <div class="relative w-5 sm:w-6 h-5 sm:h-6">
+                            <span :class="['absolute top-0 left-0 w-5 sm:w-6 h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center', navOpen ? 'rotate-45 translate-y-2 sm:translate-y-2.5' : '']"></span>
+                            <span :class="['absolute top-2 sm:top-2.5 left-0 w-5 sm:w-6 h-0.5 bg-white rounded-full transition-all duration-300', navOpen ? 'opacity-0' : 'opacity-100']"></span>
+                            <span :class="['absolute top-4 sm:top-5 left-0 w-5 sm:w-6 h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center', navOpen ? '-rotate-45 -translate-y-2 sm:-translate-y-2.5' : '']"></span>
+                        </div>
                     </button>
-                    <a 
-                        href="/register" 
-                        class="group text-white font-medium px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-300 relative"
-                    >
-                        <span class="relative">Register</span>
-                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></div>
-                    </a>
                 </div>
             </div>
 
-            <!-- Guest Links on Mobile -->
+            <!-- Mobile Navigation -->
             <transition
                 enter-active-class="transition ease-out duration-300"
                 enter-from-class="opacity-0 max-h-0"
-                enter-to-class="opacity-100 max-h-40"
+                enter-to-class="opacity-100 max-h-96"
                 leave-active-class="transition ease-in duration-200"
-                leave-from-class="opacity-100 max-h-40"
+                leave-from-class="opacity-100 max-h-96"
                 leave-to-class="opacity-0 max-h-0"
             >
-                <div v-if="!user && navOpen" class="md:hidden px-6 pb-6 border-t border-white border-opacity-20 mt-4 pt-4 overflow-hidden">
-                    <button 
-                        @click="openLoginModal" 
-                        class="block w-full text-left text-white font-medium py-3 px-4 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200 mb-2"
-                    >
-                        Login
-                    </button>
-                    <a 
-                        href="/register" 
-                        class="block w-full text-left text-white font-medium py-3 px-4 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
-                    >
-                        Register
-                    </a>
+                <div v-if="navOpen" class="lg:hidden overflow-hidden bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 border-t border-white border-opacity-20">
+                    <!-- Navigation Links -->
+                    <div class="px-4 py-4 space-y-2">
+                        <a 
+                            href="/" 
+                            class="block px-4 py-3 text-white font-medium rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
+                            @click="closeNav"
+                        >
+                            Home
+                        </a>
+                        
+                        <a 
+                            href="/projects" 
+                            class="block px-4 py-3 text-white font-medium rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
+                            @click="closeNav"
+                        >
+                            My Projects
+                        </a>
+                        
+                        <a 
+                            href="/tests" 
+                            class="block px-4 py-3 text-white font-medium rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
+                            @click="closeNav"
+                        >
+                            Quizzes
+                        </a>
+                    </div>
+
+                    <!-- Guest Links on Mobile -->
+                    <div v-if="!user" class="px-4 pb-4 border-t border-white border-opacity-20 pt-4 space-y-2">
+                        <button 
+                            @click="openLoginModal" 
+                            class="block w-full text-left text-white font-medium py-3 px-4 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
+                        >
+                            Login
+                        </button>
+                        <a 
+                            href="/register" 
+                            class="block w-full text-left text-white font-medium py-3 px-4 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
+                        >
+                            Register
+                        </a>
+                    </div>
                 </div>
             </transition>
 
@@ -235,19 +258,19 @@
                         leave-from-class="opacity-100 scale-100 translate-y-0"
                         leave-to-class="opacity-0 scale-95 translate-y-4"
                     >
-                        <div class="bg-white backdrop-blur-lg bg-opacity-95 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-white border-opacity-30 relative overflow-hidden">
+                        <div class="bg-white backdrop-blur-lg bg-opacity-95 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md border border-white border-opacity-30 relative overflow-hidden mx-4">
                             <!-- Decorative Background -->
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full -translate-y-16 translate-x-16 opacity-50"></div>
-                            <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-green-50 to-emerald-50 rounded-full translate-y-12 -translate-x-12 opacity-50"></div>
+                            <div class="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full -translate-y-12 sm:-translate-y-16 translate-x-12 sm:translate-x-16 opacity-50"></div>
+                            <div class="absolute bottom-0 left-0 w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-tr from-green-50 to-emerald-50 rounded-full translate-y-10 sm:translate-y-12 -translate-x-10 sm:-translate-x-12 opacity-50"></div>
                             
                             <div class="relative">
                                 <!-- Header -->
                                 <div class="text-center mb-6">
-                                    <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-lg">
-                                        <UserIcon class="w-8 h-8 text-white" />
+                                    <div class="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-lg">
+                                        <UserIcon class="w-6 sm:w-8 h-6 sm:h-8 text-white" />
                                     </div>
-                                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome Back</h2>
-                                    <p class="text-gray-600">Sign in to your account</p>
+                                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Welcome Back</h2>
+                                    <p class="text-gray-600 text-sm sm:text-base">Sign in to your account</p>
                                 </div>
 
                                 <form @submit.prevent="loginHandler" class="space-y-6">
@@ -257,10 +280,10 @@
                                                 v-model="email" 
                                                 type="email" 
                                                 placeholder="Email address"
-                                                class="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base"
                                                 required
                                             />
-                                            <EmailIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                            <EmailIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
                                         </div>
                                         
                                         <div class="relative">
@@ -268,10 +291,10 @@
                                                 v-model="password" 
                                                 type="password" 
                                                 placeholder="Password"
-                                                class="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base"
                                                 required
                                             />
-                                            <LockIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                            <LockIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
                                         </div>
                                     </div>
 
@@ -279,11 +302,11 @@
                                         <button 
                                             type="submit"
                                             :disabled="isLoading"
-                                            class="group w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold py-4 rounded-xl hover:from-green-700 hover:to-emerald-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl"
+                                            class="group w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold py-3 sm:py-4 rounded-xl hover:from-green-700 hover:to-emerald-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl text-sm sm:text-base"
                                         >
                                             <span v-if="!isLoading">Login</span>
                                             <div v-else class="flex items-center justify-center gap-2">
-                                                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                                <div class="w-4 sm:w-5 h-4 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                                                 <span>Logging in...</span>
                                             </div>
                                         </button>
@@ -291,7 +314,7 @@
                                         <button 
                                             @click="closeLoginModal" 
                                             type="button" 
-                                            class="w-full text-gray-600 font-medium py-3 hover:text-gray-800 transition-colors duration-200"
+                                            class="w-full text-gray-600 font-medium py-3 hover:text-gray-800 transition-colors duration-200 text-sm sm:text-base"
                                         >
                                             Cancel
                                         </button>
@@ -309,8 +332,8 @@
                                 >
                                     <div v-if="error" class="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl">
                                         <div class="flex items-center gap-2">
-                                            <AlertCircleIcon class="w-5 h-5 text-red-500" />
-                                            <p class="text-red-700 font-medium">{{ error }}</p>
+                                            <AlertCircleIcon class="w-4 sm:w-5 h-4 sm:h-5 text-red-500 flex-shrink-0" />
+                                            <p class="text-red-700 font-medium text-sm sm:text-base">{{ error }}</p>
                                         </div>
                                     </div>
                                 </transition>
@@ -503,150 +526,12 @@ watch(dropdownOpen, (val) => {
     animation-delay: 2s;
 }
 
-/* Backdrop Blur Support */
-.backdrop-blur-sm {
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+/* Responsive Max Height */
+.max-h-96 {
+    max-height: 24rem;
 }
 
-.backdrop-blur-lg {
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-}
-
-/* Opacity Classes */
-.bg-opacity-10 {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.bg-opacity-20 {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.bg-opacity-30 {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.bg-opacity-50 {
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.bg-opacity-90 {
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-.bg-opacity-95 {
-    background-color: rgba(255, 255, 255, 0.95);
-}
-
-.border-opacity-20 {
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.border-opacity-30 {
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.border-opacity-50 {
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Black Opacity Classes */
-.bg-black.bg-opacity-30 {
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-/* Gradient Text */
-.bg-clip-text {
-    background-clip: text;
-    -webkit-background-clip: text;
-}
-
-.text-transparent {
-    color: transparent;
-}
-
-/* Transform Classes */
-.rotate-180 {
-    transform: rotate(180deg);
-}
-
-.rotate-45 {
-    transform: rotate(45deg);
-}
-
-.-rotate-45 {
-    transform: rotate(-45deg);
-}
-
-.scale-0 {
-    transform: scale(0);
-}
-
-.scale-95 {
-    transform: scale(0.95);
-}
-
-.scale-100 {
-    transform: scale(1);
-}
-
-.-translate-x-16 {
-    transform: translateX(-4rem);
-}
-
-.-translate-y-16 {
-    transform: translateY(-4rem);
-}
-
-.translate-x-12 {
-    transform: translateX(3rem);
-}
-
-.translate-y-12 {
-    transform: translateY(3rem);
-}
-
-.translate-x-16 {
-    transform: translateX(4rem);
-}
-
-.-translate-x-12 {
-    transform: translateX(-3rem);
-}
-
-.translate-y-2\.5 {
-    transform: translateY(0.625rem);
-}
-
-.-translate-y-2\.5 {
-    transform: translateY(-0.625rem);
-}
-
-.translate-y-2 {
-    transform: translateY(0.5rem);
-}
-
-.translate-y-4 {
-    transform: translateY(1rem);
-}
-
-.-translate-y-1\/2 {
-    transform: translateY(-50%);
-}
-
-/* Responsive Classes */
-@media (max-width: 768px) {
-    .max-h-0 {
-        max-height: 0;
-    }
-    
-    .max-h-40 {
-        max-height: 10rem;
-    }
-}
-
-/* Focus Styles */
+/* Focus Ring */
 .focus\:ring-2:focus {
     box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.5);
 }
@@ -671,87 +556,36 @@ watch(dropdownOpen, (val) => {
     border-color: transparent;
 }
 
-/* Disabled States */
-.disabled\:opacity-50:disabled {
-    opacity: 0.5;
+/* Custom backdrop blur for older browsers */
+@supports not (backdrop-filter: blur()) {
+    .backdrop-blur-sm {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    .backdrop-blur-lg {
+        background-color: rgba(255, 255, 255, 0.95);
+    }
 }
 
-.disabled\:cursor-not-allowed:disabled {
-    cursor: not-allowed;
+/* Ensure proper stacking for mobile menu */
+@media (max-width: 1024px) {
+    .lg\:hidden {
+        position: relative;
+        z-index: 40;
+    }
 }
 
-.disabled\:transform-none:disabled {
-    transform: none;
+/* Improved touch targets for mobile */
+@media (max-width: 640px) {
+    .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+    }
 }
 
-/* Group Hover Effects */
-.group:hover .group-hover\:bg-opacity-100 {
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.group:hover .group-hover\:bg-opacity-20 {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.group:hover .group-hover\:text-green-700 {
-    color: rgb(21 128 61);
-}
-
-.group:hover .group-hover\:text-green-800 {
-    color: rgb(22 101 52);
-}
-
-.group:hover .group-hover\:text-red-700 {
-    color: rgb(185 28 28);
-}
-
-.group:hover .group-hover\:scale-100 {
-    transform: scale(1);
-}
-
-.group:hover .group-hover\:w-full {
-    width: 100%;
-}
-
-.group:hover .group-hover\:left-0 {
-    left: 0;
-}
-
-.group:hover .group-hover\:opacity-100 {
-    opacity: 1;
-}
-
-/* Animation Timing */
-.transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.duration-150 {
-    transition-duration: 150ms;
-}
-
-.duration-200 {
-    transition-duration: 200ms;
-}
-
-.duration-300 {
-    transition-duration: 300ms;
-}
-
-.duration-500 {
-    transition-duration: 500ms;
-}
-
-.ease-in {
-    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-
-.ease-out {
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-}
-
-.ease-in-out {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Text size adjustments for very small screens */
+@media (max-width: 380px) {
+    .text-responsive {
+        font-size: 0.875rem;
+    }
 }
 </style>

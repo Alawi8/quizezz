@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="min-h-screen bg-gradient-to-br from-gray-50 to-green-50 dark:from-gray-900 dark:to-black transition-colors duration-300">
     <Navbar />
-    <main class="container mx-auto px-4 py-6">
+    <main >
       <Transition name="fade" mode="out-in">
         <router-view />
       </Transition>

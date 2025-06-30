@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 text-center">
+  <div>
       <Header/>
 
       <router-view />
