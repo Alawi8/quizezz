@@ -67,13 +67,13 @@
 
               <button 
                 v-else
-                @click="navigateToRegister"
+                @click="showSubscriptionModal = true"
                 class="group relative overflow-hidden w-full md:w-auto md:mx-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base md:text-lg font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
               >
                 <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="relative flex items-center justify-center gap-3">
-                  <component :is="UserPlusIcon" class="w-5 md:w-6 h-5 md:h-6 group-hover:animate-bounce" />
-                  <span>Join QuizzApp</span>
+                  <component :is="CrownIcon" class="w-5 md:w-6 h-5 md:h-6 group-hover:animate-bounce" />
+                  <span>Subscribe Now</span>
                   <component :is="ArrowRightIcon" class="w-4 md:w-5 h-4 md:h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </button>
@@ -265,36 +265,52 @@
             </div>
           </div>
 
-          <!-- Unauthorized State -->
+          <!-- Unauthorized State - Subscribe -->
           <div v-else class="text-center py-10 md:py-20">
-            <div class="max-w-md mx-auto backdrop-blur-sm bg-white bg-opacity-70 rounded-2xl md:rounded-3xl p-8 md:p-12 border border-white border-opacity-30 shadow-xl">
-              <div class="w-16 md:w-24 h-16 md:h-24 bg-gradient-to-r from-red-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
-                <component :is="LockClosedIcon" class="w-8 md:w-12 h-8 md:h-12 text-white" />
+            <div class="max-w-lg mx-auto backdrop-blur-sm bg-white bg-opacity-70 rounded-2xl md:rounded-3xl p-8 md:p-12 border border-white border-opacity-30 shadow-xl">
+              <div class="w-16 md:w-24 h-16 md:h-24 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                <component :is="CrownIcon" class="w-8 md:w-12 h-8 md:h-12 text-white" />
               </div>
-              <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">Access Required</h3>
+              <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">Premium Access Required</h3>
               <p class="text-gray-600 mb-6 md:mb-8 text-sm md:text-base">
-                Join our community to access amazing quizzes and start your learning journey!
+                Unlock unlimited access to all quizzes, advanced analytics, and premium features with our subscription plans.
               </p>
-              <button 
-                @click="navigateToRegister"
-                class="w-full md:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
-                Join Now
-              </button>
+              <div class="space-y-4">
+                <button 
+                  @click="showSubscriptionModal = true"
+                  class="w-full md:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  <div class="flex items-center justify-center gap-3">
+                    <component :is="CrownIcon" class="w-5 h-5" />
+                    <span>Choose Your Plan</span>
+                    <component :is="ArrowRightIcon" class="w-4 h-4" />
+                  </div>
+                </button>
+                <p class="text-sm text-gray-500">
+                  Plans starting from <span class="font-semibold text-green-600">30 SAR/month</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </div>
+
+    <!-- Subscription Modal -->
+    <SubscriptionPlans 
+      v-if="showSubscriptionModal"
+      @close="showSubscriptionModal = false"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watchEffect, reactive } from 'vue'
-import axios from '@/auth/axios'
+import axios from '@/composable/axios.js'
 import { useRouter } from 'vue-router'
 import useUserAuth from '@/composable/userAuth'
 import { BarChart2, FileText, FolderOpen, Settings } from 'lucide-vue-next'
+import SubscriptionPlans from './SubscriptionPlans.vue'
 
 // Icons - SVG templates
 const StarIcon = { 
@@ -305,7 +321,7 @@ const StarIcon = {
 
 const RocketIcon = { 
   template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.60a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
   </svg>` 
 }
 
@@ -315,9 +331,9 @@ const ArrowRightIcon = {
   </svg>` 
 }
 
-const UserPlusIcon = { 
+const CrownIcon = { 
   template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.765z" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236l2.25 14.794m0 0a7.5 7.5 0 01-5.026-5.721M2.25 4.5l14.794 2.25a7.5 7.5 0 005.721 5.026c2.054.343 4.157.694 6.311 1.073" />
   </svg>` 
 }
 
@@ -364,12 +380,6 @@ const PlayIcon = {
   </svg>` 
 }
 
-const LockClosedIcon = { 
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-  </svg>` 
-}
-
 // Service Class
 class QuizService {
   constructor() {
@@ -401,6 +411,7 @@ const { token, fetchUser, hasAnyRole } = useUserAuth()
 const loadingUser = ref(true)
 const quizService = reactive(new QuizService())
 const canViewQuizzes = computed(() => token.value && hasAnyRole(['super-admin', 'student']))
+const showSubscriptionModal = ref(false)
 
 // Refs for sections
 const featuresSection = ref(null)
@@ -409,10 +420,6 @@ const quizzesSection = ref(null)
 // Methods
 function startTest(id) {
   window.location.href = `/questions/${id}`
-}
-
-function navigateToRegister() {
-  router.push('/register')
 }
 
 function scrollToQuizzes() {
@@ -561,10 +568,6 @@ watchEffect(() => {
 
 .-translate-x-8 {
   transform: translateX(-2rem);
-}
-
-.translate-y-8 {
-  transform: translateY(2rem);
 }
 
 /* Group Hover Effects */

@@ -22,12 +22,12 @@
             <nav class="flex items-center gap-2">
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-2">
-                    <router-link 
-                        to="/" 
+                    <a
+                        href="/" 
                         class="group relative bg-white/15 px-4 py-2.5 rounded-xl hover:bg-white/25 transition-all duration-300 hover:scale-105"
                     >
                         <Home class="w-5 h-5" />
-                    </router-link>
+                    </a>
 
                     <button class="group relative bg-white/15 px-4 py-2.5 rounded-xl hover:bg-white/25 transition-all duration-300 hover:scale-105">
                         <HelpCircle class="w-5 h-5" />

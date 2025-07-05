@@ -507,7 +507,7 @@
 
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue'
-import axios from '@/auth/axios'
+import axios from '@/composable/axios'
 import useUserAuth from '@/composable/userAuth'
 
 // Lucide Vue Icons

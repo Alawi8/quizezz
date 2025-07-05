@@ -9,7 +9,7 @@
             leave-from-class="opacity-100"
             leave-to-class="opacity-0"
         >
-            <div v-if="showLogin" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40"></div>
+            <div v-if="showLogin || showRegister" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40"></div>
         </transition>
 
         <header class="relative bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white shadow-2xl sticky top-0 z-50 rounded-2xl mx-2 sm:mx-4 mt-2 sm:mt-4 backdrop-blur-lg border border-white border-opacity-20">
@@ -54,14 +54,14 @@
                         <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
                     </a>
                     
-                    <a 
-                        href="/tests" 
+                    <RouterLink
+                        to="/quizzes" 
                         class="group relative px-3 xl:px-4 py-2 text-white font-medium transition-all duration-300 hover:text-green-100 rounded-xl hover:bg-white hover:bg-opacity-10"
                     >
                         <span class="relative z-10">Quizzes</span>
                         <div class="absolute inset-0 bg-white bg-opacity-0 group-hover:bg-opacity-20 rounded-xl transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
                         <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
-                    </a>
+                    </RouterLink>
                 </nav>
 
                 <!-- Right Side - User/Auth Section -->
@@ -162,13 +162,13 @@
                             <div class="absolute inset-0 bg-gradient-to-r from-green-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <span class="relative">Login</span>
                         </button>
-                        <a 
-                            href="/register" 
+                        <button 
+                            @click="openRegisterModal" 
                             class="group text-white font-medium px-3 lg:px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-300 relative text-sm lg:text-base"
                         >
                             <span class="relative">Register</span>
                             <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></div>
-                        </a>
+                        </button>
                     </div>
 
                     <!-- Mobile Menu Toggle -->
@@ -213,13 +213,13 @@
                             My Projects
                         </a>
                         
-                        <a 
-                            href="/tests" 
+                        <RouterLink 
+                            to="/quizzes" 
                             class="block px-4 py-3 text-white font-medium rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
                             @click="closeNav"
                         >
                             Quizzes
-                        </a>
+                        </RouterLink>
                     </div>
 
                     <!-- Guest Links on Mobile -->
@@ -230,12 +230,12 @@
                         >
                             Login
                         </button>
-                        <a 
-                            href="/register" 
+                        <button 
+                            @click="openRegisterModal" 
                             class="block w-full text-left text-white font-medium py-3 px-4 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-200"
                         >
                             Register
-                        </a>
+                        </button>
                     </div>
                 </div>
             </transition>
@@ -249,7 +249,7 @@
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
-                <div v-if="showLogin" class="fixed inset-0 flex items-center justify-center z-50 p-4">
+                <div v-if="showLogin" class="fixed inset-0 flex items-center justify-center z-50 p-4 min-h-screen">
                     <transition
                         enter-active-class="transition ease-out duration-300"
                         enter-from-class="opacity-0 scale-95 translate-y-4"
@@ -258,7 +258,7 @@
                         leave-from-class="opacity-100 scale-100 translate-y-0"
                         leave-to-class="opacity-0 scale-95 translate-y-4"
                     >
-                        <div class="bg-white backdrop-blur-lg bg-opacity-95 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md border border-white border-opacity-30 relative overflow-hidden mx-4">
+                        <div class="bg-white backdrop-blur-lg bg-opacity-95 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md border border-white border-opacity-30 relative overflow-hidden mx-4 my-auto">
                             <!-- Decorative Background -->
                             <div class="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full -translate-y-12 sm:-translate-y-16 translate-x-12 sm:translate-x-16 opacity-50"></div>
                             <div class="absolute bottom-0 left-0 w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-tr from-green-50 to-emerald-50 rounded-full translate-y-10 sm:translate-y-12 -translate-x-10 sm:-translate-x-12 opacity-50"></div>
@@ -280,7 +280,7 @@
                                                 v-model="email" 
                                                 type="email" 
                                                 placeholder="Email address"
-                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base text-gray-900"
                                                 required
                                             />
                                             <EmailIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
@@ -291,7 +291,7 @@
                                                 v-model="password" 
                                                 type="password" 
                                                 placeholder="Password"
-                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base text-gray-900"
                                                 required
                                             />
                                             <LockIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
@@ -311,13 +311,22 @@
                                             </div>
                                         </button>
                                         
-                                        <button 
-                                            @click="closeLoginModal" 
-                                            type="button" 
-                                            class="w-full text-gray-600 font-medium py-3 hover:text-gray-800 transition-colors duration-200 text-sm sm:text-base"
-                                        >
-                                            Cancel
-                                        </button>
+                                        <div class="flex gap-2">
+                                            <button 
+                                                @click="closeLoginModal" 
+                                                type="button" 
+                                                class="flex-1 text-gray-600 font-medium py-3 hover:text-gray-800 transition-colors duration-200 text-sm sm:text-base"
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button 
+                                                @click="switchToRegister" 
+                                                type="button" 
+                                                class="flex-1 text-green-600 font-medium py-3 hover:text-green-800 transition-colors duration-200 text-sm sm:text-base"
+                                            >
+                                                Register
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
 
@@ -342,6 +351,157 @@
                     </transition>
                 </div>
             </transition>
+
+            <!-- Enhanced Register Modal -->
+            <transition
+                enter-active-class="transition ease-out duration-300"
+                enter-from-class="opacity-0"
+                enter-to-class="opacity-100"
+                leave-active-class="transition ease-in duration-200"
+                leave-from-class="opacity-100"
+                leave-to-class="opacity-0"
+            >
+                <div v-if="showRegister" class="fixed inset-0 flex items-center justify-center z-50 p-4 min-h-screen">
+                    <transition
+                        enter-active-class="transition ease-out duration-300"
+                        enter-from-class="opacity-0 scale-95 translate-y-4"
+                        enter-to-class="opacity-100 scale-100 translate-y-0"
+                        leave-active-class="transition ease-in duration-200"
+                        leave-from-class="opacity-100 scale-100 translate-y-0"
+                        leave-to-class="opacity-0 scale-95 translate-y-4"
+                    >
+                        <div class="bg-white backdrop-blur-lg bg-opacity-95 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md border border-white border-opacity-30 relative overflow-hidden mx-4 my-auto">
+                            <!-- Decorative Background -->
+                            <div class="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full -translate-y-12 sm:-translate-y-16 translate-x-12 sm:translate-x-16 opacity-50"></div>
+                            <div class="absolute bottom-0 left-0 w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-tr from-blue-50 to-indigo-50 rounded-full translate-y-10 sm:translate-y-12 -translate-x-10 sm:-translate-x-12 opacity-50"></div>
+                            
+                            <div class="relative">
+                                <!-- Header -->
+                                <div class="text-center mb-6">
+                                    <div class="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl mb-4 shadow-lg">
+                                        <UserPlusIcon class="w-6 sm:w-8 h-6 sm:h-8 text-white" />
+                                    </div>
+                                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Create Account</h2>
+                                    <p class="text-gray-600 text-sm sm:text-base">Join QuizzApp today</p>
+                                </div>
+
+                                <form @submit.prevent="registerHandler" class="space-y-6">
+                                    <div class="space-y-4">
+                                        <div class="relative">
+                                            <input 
+                                                v-model="registerName" 
+                                                type="text" 
+                                                placeholder="Full Name"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base text-gray-900"
+                                                required
+                                            />
+                                            <UserIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
+                                        </div>
+
+                                        <div class="relative">
+                                            <input 
+                                                v-model="registerEmail" 
+                                                type="email" 
+                                                placeholder="Email address"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base text-gray-900"
+                                                required
+                                            />
+                                            <EmailIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
+                                        </div>
+                                        
+                                        <div class="relative">
+                                            <input 
+                                                v-model="registerPassword" 
+                                                type="password" 
+                                                placeholder="Password"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base text-gray-900"
+                                                required
+                                            />
+                                            <LockIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
+                                        </div>
+
+                                        <div class="relative">
+                                            <input 
+                                                v-model="registerConfirmPassword" 
+                                                type="password" 
+                                                placeholder="Confirm Password"
+                                                class="w-full px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base text-gray-900"
+                                                required
+                                            />
+                                            <LockIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
+                                        </div>
+                                    </div>
+
+                                    <div class="space-y-4">
+                                        <button 
+                                            type="submit"
+                                            :disabled="isRegisterLoading"
+                                            class="group w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 sm:py-4 rounded-xl hover:from-blue-700 hover:to-indigo-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl text-sm sm:text-base"
+                                        >
+                                            <span v-if="!isRegisterLoading">Create Account</span>
+                                            <div v-else class="flex items-center justify-center gap-2">
+                                                <div class="w-4 sm:w-5 h-4 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                                <span>Creating Account...</span>
+                                            </div>
+                                        </button>
+                                        
+                                        <div class="flex gap-2">
+                                            <button 
+                                                @click="closeRegisterModal" 
+                                                type="button" 
+                                                class="flex-1 text-gray-600 font-medium py-3 hover:text-gray-800 transition-colors duration-200 text-sm sm:text-base"
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button 
+                                                @click="switchToLogin" 
+                                                type="button" 
+                                                class="flex-1 text-blue-600 font-medium py-3 hover:text-blue-800 transition-colors duration-200 text-sm sm:text-base"
+                                            >
+                                                Login
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Error Message -->
+                                <transition
+                                    enter-active-class="transition ease-out duration-200"
+                                    enter-from-class="opacity-0 translate-y-2"
+                                    enter-to-class="opacity-100 translate-y-0"
+                                    leave-active-class="transition ease-in duration-150"
+                                    leave-from-class="opacity-100 translate-y-0"
+                                    leave-to-class="opacity-0 translate-y-2"
+                                >
+                                    <div v-if="registerError" class="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl">
+                                        <div class="flex items-center gap-2">
+                                            <AlertCircleIcon class="w-4 sm:w-5 h-4 sm:h-5 text-red-500 flex-shrink-0" />
+                                            <p class="text-red-700 font-medium text-sm sm:text-base">{{ registerError }}</p>
+                                        </div>
+                                    </div>
+                                </transition>
+
+                                <!-- Success Message -->
+                                <transition
+                                    enter-active-class="transition ease-out duration-200"
+                                    enter-from-class="opacity-0 translate-y-2"
+                                    enter-to-class="opacity-100 translate-y-0"
+                                    leave-active-class="transition ease-in duration-150"
+                                    leave-from-class="opacity-100 translate-y-0"
+                                    leave-to-class="opacity-0 translate-y-2"
+                                >
+                                    <div v-if="registerSuccess" class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl">
+                                        <div class="flex items-center gap-2">
+                                            <CheckCircleIcon class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 flex-shrink-0" />
+                                            <p class="text-green-700 font-medium text-sm sm:text-base">{{ registerSuccess }}</p>
+                                        </div>
+                                    </div>
+                                </transition>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+            </transition>
         </header>
     </div>
 </template>
@@ -350,14 +510,16 @@
 import { ref, onMounted, watch, onUnmounted } from 'vue'
 import useUserAuth from '@/composable/userAuth'
 
-const { user, login, logout, init } = useUserAuth()
+const { user, login, logout, init, register } = useUserAuth()
 
 // Icons
 const ChevronDownIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>' }
 const UserIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>' }
+const UserPlusIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" /></svg>' }
 const EmailIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>' }
 const LockIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>' }
 const AlertCircleIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>' }
+const CheckCircleIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>' }
 const LogoutIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>' }
 
 // Menu Icons
@@ -368,12 +530,24 @@ const DashboardIcon = { template: '<svg xmlns="http://www.w3.org/2000/svg" fill=
 
 // State
 const showLogin = ref(false)
+const showRegister = ref(false)
 const dropdownOpen = ref(false)
 const navOpen = ref(false)
+
+// Login Form
 const email = ref('')
 const password = ref('')
 const error = ref(null)
 const isLoading = ref(false)
+
+// Register Form
+const registerName = ref('')
+const registerEmail = ref('')
+const registerPassword = ref('')
+const registerConfirmPassword = ref('')
+const registerError = ref(null)
+const registerSuccess = ref(null)
+const isRegisterLoading = ref(false)
 
 // Methods
 const toggleNav = () => {
@@ -381,6 +555,7 @@ const toggleNav = () => {
     if (navOpen.value) {
         dropdownOpen.value = false
         showLogin.value = false
+        showRegister.value = false
     }
 }
 
@@ -389,16 +564,31 @@ const toggleDropdown = () => {
     if (dropdownOpen.value) {
         navOpen.value = false
         showLogin.value = false
+        showRegister.value = false
     }
 }
 
 const openLoginModal = () => {
     showLogin.value = true
+    showRegister.value = false
     navOpen.value = false
     dropdownOpen.value = false
     error.value = null
     email.value = ''
     password.value = ''
+}
+
+const openRegisterModal = () => {
+    showRegister.value = true
+    showLogin.value = false
+    navOpen.value = false
+    dropdownOpen.value = false
+    registerError.value = null
+    registerSuccess.value = null
+    registerName.value = ''
+    registerEmail.value = ''
+    registerPassword.value = ''
+    registerConfirmPassword.value = ''
 }
 
 const closeLoginModal = () => {
@@ -407,6 +597,27 @@ const closeLoginModal = () => {
     email.value = ''
     password.value = ''
     isLoading.value = false
+}
+
+const closeRegisterModal = () => {
+    showRegister.value = false
+    registerError.value = null
+    registerSuccess.value = null
+    registerName.value = ''
+    registerEmail.value = ''
+    registerPassword.value = ''
+    registerConfirmPassword.value = ''
+    isRegisterLoading.value = false
+}
+
+const switchToRegister = () => {
+    closeLoginModal()
+    openRegisterModal()
+}
+
+const switchToLogin = () => {
+    closeRegisterModal()
+    openLoginModal()
 }
 
 const closeNav = () => {
@@ -440,6 +651,49 @@ async function loginHandler() {
     }
 }
 
+async function registerHandler() {
+    registerError.value = null
+    registerSuccess.value = null
+    isRegisterLoading.value = true
+    
+    try {
+        // Validate password match
+        if (registerPassword.value !== registerConfirmPassword.value) {
+            registerError.value = 'Passwords do not match'
+            return
+        }
+
+        // Validate password length
+        if (registerPassword.value.length < 6) {
+            registerError.value = 'Password must be at least 6 characters'
+            return
+        }
+
+        // استدعاء دالة التسجيل بالمعاملات المنفصلة
+        const result = await register(
+            registerName.value,
+            registerEmail.value, 
+            registerPassword.value
+        )
+        
+        if (result.success) {
+            registerSuccess.value = 'Account created successfully! You can now login.'
+            
+            // Auto switch to login after 2 seconds
+            setTimeout(() => {
+                switchToLogin()
+            }, 2000)
+        } else {
+            registerError.value = result.message || 'Registration failed'
+        }
+        
+    } catch (err) {
+        registerError.value = err.message || 'Registration failed'
+    } finally {
+        isRegisterLoading.value = false
+    }
+}
+
 // Close dropdowns when clicking outside
 const handleClickOutside = (event) => {
     const target = event.target
@@ -464,6 +718,15 @@ watch(showLogin, (val) => {
     if (val) {
         navOpen.value = false
         dropdownOpen.value = false
+        showRegister.value = false
+    }
+})
+
+watch(showRegister, (val) => {
+    if (val) {
+        navOpen.value = false
+        dropdownOpen.value = false
+        showLogin.value = false
     }
 })
 
@@ -471,9 +734,9 @@ watch(dropdownOpen, (val) => {
     if (val) {
         navOpen.value = false
         showLogin.value = false
+        showRegister.value = false
     }
 })
-
 </script>
 
 <style scoped>
@@ -538,6 +801,10 @@ watch(dropdownOpen, (val) => {
 
 .focus\:ring-green-500:focus {
     box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.5);
+}
+
+.focus\:ring-blue-500:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }
 
 .focus\:ring-white:focus {

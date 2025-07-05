@@ -2,12 +2,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/Home.vue'
 import useUserAuth from '@/composable/userAuth' // تأكد من المسار الصحيح
+import SectionsComponent from '../components/SectionsComponent.vue'
 
 const routes = [
     {
         path: '/',
         name: 'home',
         component: Home,
+    },
+
+        {
+        path: '/quizzes',
+        name: 'quizzes',
+        component: SectionsComponent,
     },
 ]
 

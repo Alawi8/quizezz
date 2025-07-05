@@ -289,7 +289,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, watch } from 'vue'
-import axios from '@/auth/axios'
+import axios from '@/composable/axios.js'
 import { Edit, Trash, Plus, Folder } from 'lucide-vue-next'
 
 // State Management

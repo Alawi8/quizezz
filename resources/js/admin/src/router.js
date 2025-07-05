@@ -19,25 +19,25 @@ const routes = [
         path: '/admin/dashboard/questions',
         name: 'Questions',
         component: Questions,
-        meta: { requiresAuth: true, roles: ['super-admin', 'student'] },
+        meta: { requiresAuth: true, roles: ['super-admin', 'admin' ] },
     },
     {
         path: '/admin/dashboard/sections',
         name: 'Sections',
         component: Sections,
-        meta: { requiresAuth: true, roles: ['super-admin', 'student'] },
+        meta: { requiresAuth: true, roles: ['super-admin', 'admin' ] },
     },
     {
         path: '/admin/dashboard/users',
         name: 'Users',
         component: Users,
-        meta: { requiresAuth: true, roles: ['super-admin', 'student'] },
+        meta: { requiresAuth: true, roles: ['super-admin', 'admin' ] },
     },
     {
         path: '/admin/dashboard/settings',
         name: 'Settings',
         component: Settings,
-        meta: { requiresAuth: true, roles: ['super-admin', 'student'] },
+        meta: { requiresAuth: true, roles: ['super-admin' ,'admin'] },
     },
 
 ]

@@ -5,11 +5,11 @@
         <!-- Logo Section -->
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-200">
-            <span class="text-white font-bold text-lg">Q</span>
+            <a href="/" class="text-white font-bold text-lg">Q</a>
           </div>
-          <span class="hidden sm:block text-xl font-bold bg-gradient-to-r from-green-600 via-green-700 to-emerald-700 bg-clip-text text-transparent">
+          <a href="/" class="hidden sm:block text-xl font-bold bg-gradient-to-r from-green-600 via-green-700 to-emerald-700 bg-clip-text text-transparent">
             QuizApp
-          </span>
+          </a>
         </div>
 
         <!-- Desktop Navigation -->
@@ -113,18 +113,25 @@
             </button>
           </div>
 
-          <!-- Theme Toggle -->
+          <!-- Reset Test Button -->
           <div class="relative group">
             <button 
-              @click="toggleTheme"
-              class="flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 transform hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-              title="Toggle Theme"
+              @click="resetTest"
+              :disabled="!testId || isResetLoading"
+              class="flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 transform hover:scale-110 relative"
+              :class="[
+                testId && !isResetLoading
+                  ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400'
+                  : 'text-gray-300 dark:text-gray-700 cursor-not-allowed'
+              ]"
+              :title="testId ? 'Reset Test' : 'No test selected'"
             >
-              <Settings class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
+              <RotateCcw v-if="!isResetLoading" class="w-5 h-5" />
+              <Loader2 v-else class="w-5 h-5 animate-spin" />
               
               <!-- Tooltip -->
               <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-700 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 pointer-events-none">
-                Settings
+                {{ isResetLoading ? 'Resetting...' : 'Reset Test' }}
                 <div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 dark:bg-gray-700 rotate-45"></div>
               </div>
             </button>
@@ -214,29 +221,110 @@
               <span class="font-medium">{{ isFullscreen ? 'Exit Fullscreen' : 'Fullscreen' }}</span>
             </button>
 
-            <!-- Theme Toggle -->
+            <!-- Reset Test -->
             <button 
-              @click="toggleTheme"
-              class="flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 w-full"
+              @click="resetTest"
+              :disabled="!testId || isResetLoading"
+              class="flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-200 w-full"
+              :class="[
+                testId && !isResetLoading
+                  ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
+                  : 'text-gray-400 dark:text-gray-600 cursor-not-allowed'
+              ]"
             >
-              <Settings class="w-6 h-6 flex-shrink-0" />
-              <span class="font-medium">Settings</span>
+              <RotateCcw v-if="!isResetLoading" class="w-6 h-6 flex-shrink-0" />
+              <Loader2 v-else class="w-6 h-6 flex-shrink-0 animate-spin" />
+              <span class="font-medium">{{ isResetLoading ? 'Resetting...' : 'Reset Test' }}</span>
             </button>
           </div>
         </div>
       </Transition>
     </div>
+
+    <!-- Success Toast -->
+    <Transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="transform translate-y-2 opacity-0"
+      enter-to-class="transform translate-y-0 opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="transform translate-y-0 opacity-100"
+      leave-to-class="transform translate-y-2 opacity-0"
+    >
+      <div
+        v-if="showSuccessToast"
+        class="fixed top-20 right-4 z-50 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 shadow-lg max-w-sm"
+      >
+        <div class="flex items-center space-x-3">
+          <div class="flex-shrink-0">
+            <CheckCircle class="w-5 h-5 text-green-600 dark:text-green-400" />
+          </div>
+          <div class="text-sm font-medium text-green-800 dark:text-green-200">
+            Test reset successfully!
+          </div>
+        </div>
+      </div>
+    </Transition>
+
+    <!-- Error Toast -->
+    <Transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="transform translate-y-2 opacity-0"
+      enter-to-class="transform translate-y-0 opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="transform translate-y-0 opacity-100"
+      leave-to-class="transform translate-y-2 opacity-0"
+    >
+      <div
+        v-if="showErrorToast"
+        class="fixed top-20 right-4 z-50 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 shadow-lg max-w-sm"
+      >
+        <div class="flex items-center space-x-3">
+          <div class="flex-shrink-0">
+            <AlertCircle class="w-5 h-5 text-red-600 dark:text-red-400" />
+          </div>
+          <div>
+            <div class="text-sm font-medium text-red-800 dark:text-red-200">
+              Reset Failed
+            </div>
+            <div class="text-xs text-red-600 dark:text-red-400 mt-1">
+              {{ errorMessage }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
   </nav>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
-import { BarChart2, FileText, FolderOpen, Settings, Maximize, Minimize, Menu, X } from 'lucide-vue-next'
+import { useRoute, RouterLink, useRouter } from 'vue-router'
+import { 
+  BarChart2, 
+  FileText, 
+  FolderOpen, 
+  RotateCcw, 
+  Loader2, 
+  Maximize, 
+  Minimize, 
+  Menu, 
+  X,
+  CheckCircle,
+  AlertCircle
+} from 'lucide-vue-next'
+import axios from 'axios'
+import useUserAuth from '@/composable/userAuth.js'
 
 const route = useRoute()
+const router = useRouter()
+const { token } = useUserAuth()
+
 const isFullscreen = ref(false)
 const mobileMenuOpen = ref(false)
+const isResetLoading = ref(false)
+const showSuccessToast = ref(false)
+const showErrorToast = ref(false)
+const errorMessage = ref('')
 
 const testId = computed(() => route.params.test_id as string | undefined)
 
@@ -252,14 +340,130 @@ const closeMobileMenu = () => {
   mobileMenuOpen.value = false
 }
 
-const toggleTheme = () => {
-  const isDark = document.documentElement.classList.contains('dark')
-  if (isDark) {
-    document.documentElement.classList.remove('dark')
-    localStorage.setItem('theme', 'light')
+const showToast = (type: 'success' | 'error', message?: string) => {
+  if (type === 'success') {
+    showSuccessToast.value = true
+    setTimeout(() => {
+      showSuccessToast.value = false
+    }, 3000)
   } else {
-    document.documentElement.classList.add('dark')
-    localStorage.setItem('theme', 'dark')
+    errorMessage.value = message || 'An unexpected error occurred'
+    showErrorToast.value = true
+    setTimeout(() => {
+      showErrorToast.value = false
+    }, 5000)
+  }
+}
+
+// Enhanced Reset Test Function
+const resetTest = async () => {
+  if (!testId.value || isResetLoading.value) return
+  
+  // Show confirmation dialog with more details
+  const confirmed = window.confirm(
+    '⚠️ Reset Test Confirmation\n\n' +
+    'This action will:\n' +
+    '• Delete all your current answers\n' +
+    '• Reset your progress to zero\n' +
+    '• Clear any bookmarks\n' +
+    '• Remove saved notes\n\n' +
+    'This action cannot be undone. Are you sure you want to continue?'
+  )
+  
+  if (!confirmed) return
+  
+  try {
+    isResetLoading.value = true
+    
+    // API call to clear user answers
+    const response = await axios.post(
+      '/api/student/clear-answers',
+      { test_id: testId.value },
+      {
+        headers: {
+          'Authorization': `Bearer ${token.value}`,
+          'Content-Type': 'application/json'
+        },
+        timeout: 10000 // 10 second timeout
+      }
+    )
+    
+    if (response.status === 200) {
+      // Clear local storage data
+      try {
+        localStorage.removeItem(`bookmarks_${testId.value}`)
+        localStorage.removeItem(`quiz-notes`)
+        localStorage.removeItem('userAnswers')
+        localStorage.removeItem('testId')
+        localStorage.removeItem(`quiz-progress-${testId.value}`)
+        localStorage.removeItem(`quiz-time-${testId.value}`)
+      } catch (localStorageError) {
+        console.warn('Could not clear localStorage:', localStorageError)
+      }
+      
+      // Show success message
+      showToast('success')
+      
+      // Close mobile menu if open
+      closeMobileMenu()
+      
+      // Wait for success message to show, then redirect
+      setTimeout(async () => {
+        try {
+          // Force page reload to ensure clean state
+          if (route.name === 'quiz') {
+            window.location.reload()
+          } else {
+            await router.push({ name: 'quiz', params: { test_id: testId.value } })
+            // Small delay then reload to ensure clean state
+            setTimeout(() => {
+              window.location.reload()
+            }, 100)
+          }
+        } catch (routingError) {
+          console.error('Routing error after reset:', routingError)
+          // Fallback: just reload the page
+          window.location.reload()
+        }
+      }, 1500)
+      
+    } else {
+      throw new Error(`Server responded with status: ${response.status}`)
+    }
+    
+  } catch (error: any) {
+    console.error('Error resetting test:', error)
+    
+    let errorMsg = 'Please try again later.'
+    
+    if (error.response) {
+      // Server responded with error status
+      const status = error.response.status
+      if (status === 401) {
+        errorMsg = 'Authentication expired. Please log in again.'
+      } else if (status === 403) {
+        errorMsg = 'You do not have permission to reset this test.'
+      } else if (status === 404) {
+        errorMsg = 'Test not found or no longer available.'
+      } else if (status === 429) {
+        errorMsg = 'Too many requests. Please wait a moment.'
+      } else if (status >= 500) {
+        errorMsg = 'Server error. Please try again later.'
+      } else {
+        errorMsg = error.response.data?.message || `Server error (${status})`
+      }
+    } else if (error.request) {
+      // Network error
+      errorMsg = 'Network error. Check your connection.'
+    } else if (error.code === 'ECONNABORTED') {
+      // Timeout
+      errorMsg = 'Request timeout. Please try again.'
+    }
+    
+    showToast('error', errorMsg)
+    
+  } finally {
+    isResetLoading.value = false
   }
 }
 

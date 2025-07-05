@@ -1,93 +1,84 @@
 {
-  "_axios-DcDB5iIh.js": {
-    "file": "assets/axios-DcDB5iIh.js",
-    "name": "axios",
-    "imports": [
-      "_userAuth-By76ZzTx.js"
-    ]
-  },
-  "_folder-open-BAQaig3j.js": {
-    "file": "assets/folder-open-BAQaig3j.js",
+  "_folder-open-D5jDhKxG.js": {
+    "file": "assets/folder-open-D5jDhKxG.js",
     "name": "folder-open",
     "imports": [
-      "_settings-BnhHFY4W.js"
+      "_settings-sJoXn5LZ.js"
     ]
   },
-  "_settings-BnhHFY4W.js": {
-    "file": "assets/settings-BnhHFY4W.js",
+  "_settings-sJoXn5LZ.js": {
+    "file": "assets/settings-sJoXn5LZ.js",
     "name": "settings",
     "imports": [
-      "_userAuth-By76ZzTx.js"
+      "_userAuth--fkU-yNd.js"
     ]
   },
-  "_userAuth-By76ZzTx.js": {
-    "file": "assets/userAuth-By76ZzTx.js",
+  "_userAuth--fkU-yNd.js": {
+    "file": "assets/userAuth--fkU-yNd.js",
     "name": "userAuth"
   },
-  "_x-DrPRQ0ev.js": {
-    "file": "assets/x-DrPRQ0ev.js",
+  "_x-DFDBGaPl.js": {
+    "file": "assets/x-DFDBGaPl.js",
     "name": "x",
     "imports": [
-      "_settings-BnhHFY4W.js"
+      "_settings-sJoXn5LZ.js"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-DjAediou.css",
+    "file": "assets/app-D8RLRWOJ.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/admin/app.js": {
-    "file": "assets/app-Y-nOOOsY.js",
+    "file": "assets/app-Btia5Pu0.js",
     "name": "app",
     "src": "resources/js/admin/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-By76ZzTx.js",
-      "_settings-BnhHFY4W.js",
-      "_x-DrPRQ0ev.js",
-      "_axios-DcDB5iIh.js"
+      "_userAuth--fkU-yNd.js",
+      "_settings-sJoXn5LZ.js",
+      "_x-DFDBGaPl.js"
     ],
     "css": [
-      "assets/app-BXYw-G5n.css"
+      "assets/app-BMFMPbgl.css"
     ]
   },
   "resources/js/composable/app.js": {
-    "file": "assets/app-7E0NUIA7.js",
+    "file": "assets/app-Bko5GKZQ.js",
     "name": "app",
     "src": "resources/js/composable/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-By76ZzTx.js"
+      "_userAuth--fkU-yNd.js"
     ]
   },
   "resources/js/entrypoints/app.js": {
-    "file": "assets/app-B3dBMhe_.js",
+    "file": "assets/app-CWbds5kI.js",
     "name": "app",
     "src": "resources/js/entrypoints/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-By76ZzTx.js",
-      "_settings-BnhHFY4W.js",
-      "_axios-DcDB5iIh.js",
-      "_folder-open-BAQaig3j.js"
+      "_userAuth--fkU-yNd.js",
+      "_settings-sJoXn5LZ.js",
+      "_folder-open-D5jDhKxG.js"
     ],
     "css": [
-      "assets/app-Bb1aWH0l.css"
+      "assets/app-CVdzxdk8.css"
     ]
   },
   "resources/js/quizezz-env/app.js": {
-    "file": "assets/app-EgDJ1B-x.js",
+    "file": "assets/app-DK6BEUbc.js",
     "name": "app",
     "src": "resources/js/quizezz-env/app.js",
     "isEntry": true,
     "imports": [
-      "_userAuth-By76ZzTx.js",
-      "_settings-BnhHFY4W.js",
-      "_folder-open-BAQaig3j.js",
-      "_x-DrPRQ0ev.js"
+      "_userAuth--fkU-yNd.js",
+      "_settings-sJoXn5LZ.js",
+      "_folder-open-D5jDhKxG.js",
+      "_x-DFDBGaPl.js"
     ],
     "css": [
-      "assets/app-BtxvVggF.css"
+      "assets/app-BeY4SNCK.css"
     ]
   }
 }
